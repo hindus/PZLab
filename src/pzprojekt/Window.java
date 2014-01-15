@@ -5,14 +5,18 @@ package pzprojekt;
  *   images/middle.gif.
  */
  
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JComponent;
+import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -43,7 +47,17 @@ public class Window extends JPanel {
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
          
         add(tabbedPane);
-         
+        
+        
+        //chujowe drzewko
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+        DefaultMutableTreeNode child1 = new DefaultMutableTreeNode("Child 1");
+        root.add(child1);
+        DefaultMutableTreeNode child2 = new DefaultMutableTreeNode("Child 2");
+        root.add(child2);
+        JTree tree = new JTree(root);
+        panel1.add(new JScrollPane(tree));
+        //koniec chujowego drzewka
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
      
