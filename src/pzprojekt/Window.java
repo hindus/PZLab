@@ -79,7 +79,7 @@ public class Window extends JPanel {
         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         panel.setLayout(gbl_panel);
         
-        JLabel login = new JLabel("Nazwa u¿ytkownika:");
+        JLabel login = new JLabel("Nazwa użytkownika:");
         GridBagConstraints gbc_login = new GridBagConstraints();
         gbc_login.insets = new Insets(0, 0, 5, 5);
         gbc_login.gridx = 0;
@@ -128,7 +128,7 @@ public class Window extends JPanel {
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
          
         JComponent panel3 = makeTextPanel("Panel #3");
-        tabbedPane.addTab("Przyk³adowe okienko sklepu", panel3);
+        tabbedPane.addTab("Przykładowe okienko sklepu", panel3);
         panel3.setPreferredSize(new Dimension(800, 500));
 
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
@@ -162,7 +162,7 @@ public class Window extends JPanel {
         gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         panel_1.setLayout(gbl_panel_1);
         
-        JLabel label_1 = new JLabel("Zawartoæ Twojego koszyka:");
+        JLabel label_1 = new JLabel("Zawartość Twojego koszyka:");
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
         gbc_label_1.anchor = GridBagConstraints.WEST;
         gbc_label_1.insets = new Insets(0, 0, 5, 5);
@@ -185,7 +185,7 @@ public class Window extends JPanel {
         gbc_lblSztuk.gridy = 2;
         panel_1.add(lblSztuk, gbc_lblSztuk);
         
-        JLabel lblNaleno = new JLabel("Nale¿noæ");
+        JLabel lblNaleno = new JLabel("Należność");
         GridBagConstraints gbc_lblNaleno = new GridBagConstraints();
         gbc_lblNaleno.insets = new Insets(0, 0, 5, 0);
         gbc_lblNaleno.gridx = 2;
