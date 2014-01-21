@@ -1,9 +1,5 @@
 package pzprojekt;
 
-/*
- * TabbedPaneDemo.java requires one additional file:
- *   images/middle.gif.
- */
  
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -18,26 +14,35 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import sun.reflect.generics.tree.Tree;
+
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
+
 import javax.swing.JTextField;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JPasswordField;
+
 import java.awt.Insets;
+
 import javax.swing.BoxLayout;
+
 import java.awt.FlowLayout;
  
 public class Window extends JPanel {
-	private JTextField textField;
-	private JPasswordField passwordField;
+        private JTextField textField;
+        private JPasswordField passwordField;
     public Window() {
         super(new GridLayout(1, 1));
          
@@ -46,9 +51,13 @@ public class Window extends JPanel {
         JSplitPane pan1 = new JSplitPane();
         JPanel pan1pan1 = new JPanel();
         JPanel pan1pan2 = new JPanel();
+    	pan1pan1.setBackground(Color.WHITE);
+
+        ImagePanel a = new ImagePanel();
         pan1.setDividerLocation(130);
         pan1.setLeftComponent(pan1pan1);
-        pan1.setRightComponent(pan1pan2);
+        //pan1.setRightComponent(pan1pan2);
+        pan1.setRightComponent(a);
         tabbedPane.addTab("EPER", pan1);
 
 
@@ -70,7 +79,7 @@ public class Window extends JPanel {
         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         panel.setLayout(gbl_panel);
         
-        JLabel login = new JLabel("Nazwa użytkownika:");
+        JLabel login = new JLabel("Nazwa u¿ytkownika:");
         GridBagConstraints gbc_login = new GridBagConstraints();
         gbc_login.insets = new Insets(0, 0, 5, 5);
         gbc_login.gridx = 0;
@@ -85,7 +94,7 @@ public class Window extends JPanel {
         gbc_textField.gridy = 1;
         panel.add(textField, gbc_textField);
         textField.setColumns(10);
-        JLabel password = new JLabel("Hasło:");
+        JLabel password = new JLabel("Has³o:");
         GridBagConstraints gbc_password = new GridBagConstraints();
         gbc_password.anchor = GridBagConstraints.WEST;
         gbc_password.insets = new Insets(0, 0, 5, 5);
@@ -119,7 +128,7 @@ public class Window extends JPanel {
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
          
         JComponent panel3 = makeTextPanel("Panel #3");
-        tabbedPane.addTab("Przykładowe okienko sklepu", panel3);
+        tabbedPane.addTab("Przyk³adowe okienko sklepu", panel3);
         panel3.setPreferredSize(new Dimension(800, 500));
 
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
@@ -153,7 +162,7 @@ public class Window extends JPanel {
         gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         panel_1.setLayout(gbl_panel_1);
         
-        JLabel label_1 = new JLabel("Zawartość Twojego koszyka:");
+        JLabel label_1 = new JLabel("Zawartoæ Twojego koszyka:");
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
         gbc_label_1.anchor = GridBagConstraints.WEST;
         gbc_label_1.insets = new Insets(0, 0, 5, 5);
@@ -176,14 +185,14 @@ public class Window extends JPanel {
         gbc_lblSztuk.gridy = 2;
         panel_1.add(lblSztuk, gbc_lblSztuk);
         
-        JLabel lblNaleno = new JLabel("Należność");
+        JLabel lblNaleno = new JLabel("Nale¿noæ");
         GridBagConstraints gbc_lblNaleno = new GridBagConstraints();
         gbc_lblNaleno.insets = new Insets(0, 0, 5, 0);
         gbc_lblNaleno.gridx = 2;
         gbc_lblNaleno.gridy = 2;
         panel_1.add(lblNaleno, gbc_lblNaleno);
         
-        JLabel label = new JLabel("Jesteś zalogowany jako:" /*(select name from users where id = idZalogowanego)*/);
+        JLabel label = new JLabel("Jeste zalogowany jako:" /*(select name from users where id = idZalogowanego)*/);
         label.setBounds(321, 4, 173, 15);
         panel.add(label);
         return panel;
