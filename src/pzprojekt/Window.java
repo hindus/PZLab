@@ -143,7 +143,6 @@ public class Window extends JPanel {
         gbc_btnZaloguj.gridy = 3;
         panel.add(btnZaloguj, gbc_btnZaloguj);
 
-        tabbedPane.setSelectedIndex(1);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
          
         JComponent panel3 = makeTextPanel("Panel #3");
