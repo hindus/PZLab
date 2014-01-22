@@ -12,6 +12,12 @@ public class User {
 	}
 	
 	public static void LogIn(){
+		System.out.println("Zalogowany!");
 		zalogowany=1;
+	}
+	
+	public static void LogOut(){
+		System.out.println("Wylogowany!");
+		zalogowany=0;
 	}
 }
