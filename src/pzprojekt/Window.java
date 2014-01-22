@@ -38,6 +38,8 @@ import java.awt.Insets;
 import javax.swing.BoxLayout;
 
 import java.awt.FlowLayout;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultMutableTreeNode;
  
 public class Window extends JPanel {
         private JTextField textField;
@@ -135,7 +137,24 @@ public class Window extends JPanel {
         pan1pan1.setLayout(null);
         
         JTree tree = new JTree();
-        tree.setBounds(0, 0, 249, 427);
+        tree.setModel(new DefaultTreeModel(
+        	new DefaultMutableTreeNode("Alfa Romeo") {
+        		{
+        			DefaultMutableTreeNode node_1;
+        			node_1 = new DefaultMutableTreeNode("156");
+        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
+        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
+        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
+        			add(node_1);
+        			node_1 = new DefaultMutableTreeNode("159");
+        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
+        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
+        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
+        			add(node_1);
+        		}
+        	}
+        ));
+        tree.setBounds(0, 0, 257, 427);
         pan1pan1.add(tree);
         add(tabbedPane);
         
