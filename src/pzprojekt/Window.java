@@ -81,6 +81,8 @@ public class Window extends JPanel {
         
         JPanel panel = new JPanel();
         panel2.add(panel);
+       
+        
         GridBagLayout gbl_panel = new GridBagLayout();
         gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
         gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -145,34 +147,13 @@ public class Window extends JPanel {
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
          
         JComponent panel3 = makeTextPanel("Panel #3");
+          
         tabbedPane.addTab("Przykładowe okienko sklepu", panel3);
         panel3.setPreferredSize(new Dimension(800, 500));
 
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-
-        pan1pan1.setLayout(null);
         
-//        JTree tree = new JTree();
-//        tree.setModel(new DefaultTreeModel(
-//        	new DefaultMutableTreeNode("Alfa Romeo") {
-//        		{
-//        			DefaultMutableTreeNode node_1;
-//        			node_1 = new DefaultMutableTreeNode("156");
-//        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
-//        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
-//        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
-//        			add(node_1);
-//        			node_1 = new DefaultMutableTreeNode("159");
-//        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
-//        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
-//        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
-//        			add(node_1);
-//        		}
-//        	}
-//        ));
-//        tree.setBounds(0, 0, 257, 427);
-//        pan1pan1.add(tree);
-
+        pan1pan1.setLayout(null);
         add(tabbedPane);
         
         
