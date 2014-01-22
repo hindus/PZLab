@@ -362,8 +362,7 @@ public class Okno {
         	
         	public void actionPerformed(ActionEvent arg0) {
         		Database.userlogin(textField.getText(),passwordField.getText());
-        		String name=User.username;
-        		label.setText(name);
+        		label.setText(User.imie+" "+User.nazwisko+" "+User.adres+" tel. "+User.telefon);
         		cl.show(cards, "KOSZYK");
         	}
         });     
