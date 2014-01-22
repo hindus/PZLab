@@ -15,13 +15,24 @@ public class ImagePanel extends JPanel{
 
     private BufferedImage image;
 
+    public void ladujObrazek(String adresObrazka)
+    {
+    	try {
+			this.image = ImageIO.read(new File("pics/silnik/silnik.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    
     public ImagePanel() {
     	this.setBackground(Color.WHITE);
        try {
     	   
           image = ImageIO.read(new File("pics/eper2.jpg"));
        } catch (IOException ex) {
-           System.out.println("blad");
+           System.out.println("blad ladowania obrazka");
 
        }
     }
