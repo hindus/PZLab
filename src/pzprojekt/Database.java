@@ -24,12 +24,6 @@ public class Database {
 			}
 	}
 	
-	public static void main(String[] args)
-	{
-		 dbconnect();
-		 userlogin("test","test");
-		 User.LogOut();
-	}
 	
 	public static void userlogin(String username, String password)
 	{
@@ -44,7 +38,7 @@ public class Database {
 					try
 					{
 							String password2 = rs.getString("PASSWORD");
-							if(password.compareTo(password2)==0) User.LogIn();
+							if(password.compareTo(password2)==0) User.LogIn(username);
 							//hasło poprawne, zaloguj i umieść dane w klasie User
 							//w innym przypadku obsługa
 					}

@@ -11,8 +11,9 @@ public class User {
 			return true;
 	}
 	
-	public static void LogIn(){
+	public static void LogIn(String user){
 		System.out.println("Zalogowany!");
+		username=user;
 		zalogowany=1;
 	}
 	

@@ -44,6 +44,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Window extends JPanel {
         private JTextField textField;
         private JPasswordField passwordField;
+        private JLabel label;
     public Window() {
         super(new GridLayout(1, 1));
          
@@ -126,13 +127,21 @@ public class Window extends JPanel {
         panel.add(btnZarejestruj, gbc_btnZarejestruj);
         
         JButton btnZaloguj = new JButton("Zaloguj");
+        btnZaloguj.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		Database.userlogin(textField.getText(),passwordField.getText());
+        		String name=User.username;
+        		label.setText(name);
+        	}
+        });
+        
         GridBagConstraints gbc_btnZaloguj = new GridBagConstraints();
         gbc_btnZaloguj.insets = new Insets(0, 0, 5, 5);
         gbc_btnZaloguj.gridx = 2;
         gbc_btnZaloguj.gridy = 3;
         panel.add(btnZaloguj, gbc_btnZaloguj);
 
-        
+        tabbedPane.setSelectedIndex(1);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
          
         JComponent panel3 = makeTextPanel("Panel #3");
@@ -179,21 +188,48 @@ public class Window extends JPanel {
         panel.setLayout(null);
         
         JPanel panel_1 = new JPanel();
-        panel_1.setBounds(22, 31, 423, 215);
+        panel_1.setBounds(6, 6, 439, 240);
         panel.add(panel_1);
         GridBagLayout gbl_panel_1 = new GridBagLayout();
         gbl_panel_1.columnWidths = new int[]{103, 147, 0, 0};
-        gbl_panel_1.rowHeights = new int[]{15, 0, 0, 0, 0};
+        gbl_panel_1.rowHeights = new int[]{0, 15, 0, 0, 0, 0};
         gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         panel_1.setLayout(gbl_panel_1);
+        
+        JLabel lblZalogowanyJako = new JLabel("Zalogowany jako:");
+        GridBagConstraints gbc_lblZalogowanyJako = new GridBagConstraints();
+        gbc_lblZalogowanyJako.insets = new Insets(0, 0, 5, 5);
+        gbc_lblZalogowanyJako.gridx = 0;
+        gbc_lblZalogowanyJako.gridy = 0;
+        panel_1.add(lblZalogowanyJako, gbc_lblZalogowanyJako);
+        
+        label = new JLabel("");
+        GridBagConstraints gbc_label = new GridBagConstraints();
+        gbc_label.insets = new Insets(0, 0, 5, 5);
+        gbc_label.gridx = 1;
+        gbc_label.gridy = 0;
+        panel_1.add(label, gbc_label);
+        
+        JButton btnWyloguj = new JButton("Wyloguj");
+        btnWyloguj.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		User.LogOut();
+        		label.setText("Nie zalogowany");
+        	}
+        });
+        GridBagConstraints gbc_btnWyloguj = new GridBagConstraints();
+        gbc_btnWyloguj.insets = new Insets(0, 0, 5, 0);
+        gbc_btnWyloguj.gridx = 2;
+        gbc_btnWyloguj.gridy = 0;
+        panel_1.add(btnWyloguj, gbc_btnWyloguj);
         
         JLabel label_1 = new JLabel("Zawartość Twojego koszyka:");
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
         gbc_label_1.anchor = GridBagConstraints.WEST;
         gbc_label_1.insets = new Insets(0, 0, 5, 5);
         gbc_label_1.gridx = 0;
-        gbc_label_1.gridy = 1;
+        gbc_label_1.gridy = 2;
         panel_1.add(label_1, gbc_label_1);
         
         JLabel lblNazwaPrzedmiotu = new JLabel("Nazwa przedmiotu");
@@ -201,26 +237,22 @@ public class Window extends JPanel {
         gbc_lblNazwaPrzedmiotu.anchor = GridBagConstraints.WEST;
         gbc_lblNazwaPrzedmiotu.insets = new Insets(0, 0, 5, 5);
         gbc_lblNazwaPrzedmiotu.gridx = 0;
-        gbc_lblNazwaPrzedmiotu.gridy = 2;
+        gbc_lblNazwaPrzedmiotu.gridy = 3;
         panel_1.add(lblNazwaPrzedmiotu, gbc_lblNazwaPrzedmiotu);
         
         JLabel lblSztuk = new JLabel("Sztuk");
         GridBagConstraints gbc_lblSztuk = new GridBagConstraints();
         gbc_lblSztuk.insets = new Insets(0, 0, 5, 5);
         gbc_lblSztuk.gridx = 1;
-        gbc_lblSztuk.gridy = 2;
+        gbc_lblSztuk.gridy = 3;
         panel_1.add(lblSztuk, gbc_lblSztuk);
         
         JLabel lblNaleno = new JLabel("Należność");
         GridBagConstraints gbc_lblNaleno = new GridBagConstraints();
         gbc_lblNaleno.insets = new Insets(0, 0, 5, 0);
         gbc_lblNaleno.gridx = 2;
-        gbc_lblNaleno.gridy = 2;
+        gbc_lblNaleno.gridy = 3;
         panel_1.add(lblNaleno, gbc_lblNaleno);
-        
-        JLabel label = new JLabel("Jeste zalogowany jako:" /*(select name from users where id = idZalogowanego)*/);
-        label.setBounds(321, 4, 173, 15);
-        panel.add(label);
         return panel;
     }
      
@@ -249,9 +281,10 @@ public class Window extends JPanel {
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+            	Database.dbconnect();
                 //Turn off metal's use of bold fonts
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
-        createAndShowGUI();
+            	UIManager.put("swing.boldMetal", Boolean.FALSE);
+            	createAndShowGUI();
             }
         });
     }
