@@ -15,7 +15,7 @@ public class Database {
 				String driver = "com.mysql.jdbc.Driver"; 
 				Class.forName(driver);
 				con = DriverManager.getConnection("jdbc:mysql://mysql-717926.vipserv.org/pzlab_user","pzlab_user","password");
-				//st = con.createStatement();
+				//
 			} 
 		
 		catch (Exception ex)
@@ -28,6 +28,7 @@ public class Database {
 	{
 		 dbconnect();
 		 userlogin("test","test");
+		 User.LogOut();
 	}
 	
 	public static void userlogin(String username, String password)
@@ -35,7 +36,7 @@ public class Database {
 		try
 			{
 				String query = "select * from users where username='"+username+"'";
-
+				st=con.createStatement();
 				rs=st.executeQuery(query);
 
 				while(rs.next())
@@ -43,7 +44,8 @@ public class Database {
 					try
 					{
 							String password2 = rs.getString("PASSWORD");
-							if(password.compareTo(password2)==1) User.LogIn(); //hasło poprawne, zaloguj i umieść dane w klasie User
+							if(password.compareTo(password2)==0) User.LogIn();
+							//hasło poprawne, zaloguj i umieść dane w klasie User
 							//w innym przypadku obsługa
 					}
 					
