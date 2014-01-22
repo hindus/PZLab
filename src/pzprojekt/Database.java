@@ -14,27 +14,27 @@ public class Database {
 			{
 				String driver = "com.mysql.jdbc.Driver"; 
 				Class.forName(driver);
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/projekt","root","moneta");
-				st = con.createStatement();
+				con = DriverManager.getConnection("jdbc:mysql://mysql-717926.vipserv.org/pzlab_user","pzlab_user","password");
+				//st = con.createStatement();
 			} 
 		
 		catch (Exception ex)
 			{
-				System.out.println("wedrujaca dupa");
+				System.out.println("wedrujaca dupa");ex.printStackTrace();
 			}
 	}
 	
 	public static void main(String[] args)
 	{
 		 dbconnect();
-		 userlogin("krzychu","haslo");
+		 userlogin("test","test");
 	}
 	
 	public static void userlogin(String username, String password)
 	{
 		try
 			{
-				String query = "select * from client where login='"+username+"'";
+				String query = "select * from users where username='"+username+"'";
 
 				rs=st.executeQuery(query);
 
