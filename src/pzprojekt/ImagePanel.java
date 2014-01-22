@@ -20,7 +20,6 @@ public class ImagePanel extends JPanel{
        try {
     	   
           image = ImageIO.read(new File("pics/eper2.jpg"));
-          System.out.println("wczytany");
        } catch (IOException ex) {
            System.out.println("blad");
 

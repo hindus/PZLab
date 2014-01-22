@@ -51,12 +51,14 @@ public class Window extends JPanel {
          
         JSplitPane pan1 = new JSplitPane();
         JPanel pan1pan1 = new JPanel();
-        JPanel pan1pan2 = new JPanel();
     	pan1pan1.setBackground(Color.WHITE);
-
+    	
+    	TreePanel drzewko = new TreePanel();
+        pan1pan1.add(drzewko);
+        
         ImagePanel a = new ImagePanel();
         pan1.setDividerLocation(130);
-        pan1.setLeftComponent(pan1pan1);
+        pan1.setLeftComponent(drzewko);
         //pan1.setRightComponent(pan1pan2);
         pan1.setRightComponent(a);
         tabbedPane.addTab("EPER", pan1);
@@ -136,26 +138,27 @@ public class Window extends JPanel {
 
         pan1pan1.setLayout(null);
         
-        JTree tree = new JTree();
-        tree.setModel(new DefaultTreeModel(
-        	new DefaultMutableTreeNode("Alfa Romeo") {
-        		{
-        			DefaultMutableTreeNode node_1;
-        			node_1 = new DefaultMutableTreeNode("156");
-        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
-        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
-        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
-        			add(node_1);
-        			node_1 = new DefaultMutableTreeNode("159");
-        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
-        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
-        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
-        			add(node_1);
-        		}
-        	}
-        ));
-        tree.setBounds(0, 0, 257, 427);
-        pan1pan1.add(tree);
+//        JTree tree = new JTree();
+//        tree.setModel(new DefaultTreeModel(
+//        	new DefaultMutableTreeNode("Alfa Romeo") {
+//        		{
+//        			DefaultMutableTreeNode node_1;
+//        			node_1 = new DefaultMutableTreeNode("156");
+//        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
+//        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
+//        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
+//        			add(node_1);
+//        			node_1 = new DefaultMutableTreeNode("159");
+//        				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
+//        				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
+//        				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
+//        			add(node_1);
+//        		}
+//        	}
+//        ));
+//        tree.setBounds(0, 0, 257, 427);
+//        pan1pan1.add(tree);
+
         add(tabbedPane);
         
         
