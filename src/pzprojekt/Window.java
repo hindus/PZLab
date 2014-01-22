@@ -57,9 +57,14 @@ public class Window extends JPanel {
         pan1pan1.add(drzewko);
         
         ImagePanel a = new ImagePanel();
+        
+        ImageMap listener = new ImageMap();
+        a.addMouseListener(listener);
+        a.addMouseMotionListener(listener);
+        
         pan1.setDividerLocation(180);
         pan1.setLeftComponent(drzewko);
-        //pan1.setRightComponent(pan1pan2);
+
         pan1.setRightComponent(a);
         tabbedPane.addTab("EPER", pan1);
 
@@ -97,7 +102,7 @@ public class Window extends JPanel {
         gbc_textField.gridy = 1;
         panel.add(textField, gbc_textField);
         textField.setColumns(10);
-        JLabel password = new JLabel("Has³o:");
+        JLabel password = new JLabel("Hasło:");
         GridBagConstraints gbc_password = new GridBagConstraints();
         gbc_password.anchor = GridBagConstraints.WEST;
         gbc_password.insets = new Insets(0, 0, 5, 5);
