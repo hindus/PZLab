@@ -57,7 +57,7 @@ public class Window extends JPanel {
         pan1pan1.add(drzewko);
         
         ImagePanel a = new ImagePanel();
-        pan1.setDividerLocation(130);
+        pan1.setDividerLocation(180);
         pan1.setLeftComponent(drzewko);
         //pan1.setRightComponent(pan1pan2);
         pan1.setRightComponent(a);
