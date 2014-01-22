@@ -201,8 +201,7 @@ public class Window extends JPanel {
         		label.setText(name);
         		cl.show(cards, "KOSZYK");
         	}
-        });
-        
+        });        
         
         btnWyloguj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
