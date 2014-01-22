@@ -66,7 +66,7 @@ public class Window extends JPanel {
 
 
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-         
+          
         //JComponent panel2 = makeTextPanel("Panel #2");
         JPanel panel2 = new JPanel();
         tabbedPane.addTab("Sklep", panel2);
