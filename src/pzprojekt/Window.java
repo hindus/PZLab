@@ -37,6 +37,7 @@ public class Window extends JPanel {
         //------------------------------------TabbedPane, główne okno
         
         JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         JSplitPane splitpanel = new JSplitPane();
         JPanel drzewo = new JPanel();
     	drzewo.setBackground(Color.WHITE);
@@ -77,7 +78,7 @@ public class Window extends JPanel {
         //------------------------------------Panel logowania
   
         GridBagLayout gbl_panel = new GridBagLayout();
-        gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+        gbl_panel.columnWidths = new int[]{0, 0, 0, 201, 0, 0};
         gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
         gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -196,6 +197,7 @@ public class Window extends JPanel {
         btnZaloguj.addActionListener(new ActionListener() {
         	
         	public void actionPerformed(ActionEvent arg0) {
+        		
         		Database.userlogin(textField.getText(),passwordField.getText());
         		String name=User.username;
         		label.setText(name);
@@ -220,9 +222,6 @@ public class Window extends JPanel {
         
         drzewo.setLayout(null);
         add(tabbedPane);
-   
-        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-        
         
     }
      
@@ -233,14 +232,16 @@ public class Window extends JPanel {
      */
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("TabbedPaneDemo");
+        JFrame frame = new JFrame("PZLab Projekt");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 500); 
+         
         //Add content to the window.
         frame.getContentPane().add(new Window(), BorderLayout.CENTER);
          
         //Display the window.
         frame.pack();
+        frame.setSize(800, 600);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
      
