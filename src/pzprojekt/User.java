@@ -11,9 +11,14 @@ public class User {
 			return true;
 	}
 	
-	public static void LogIn(String user){
+	public static void LogIn(String user, String name, String surname, String address, String phone){
 		System.out.println("Zalogowany!");
 		username=user;
+		imie=name;
+		nazwisko=surname;
+		adres=address;
+		telefon=phone;
+		
 		zalogowany=1;
 	}
 	

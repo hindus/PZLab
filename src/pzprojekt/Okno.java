@@ -82,6 +82,10 @@ public class Okno {
         JPanel drzewo = new JPanel();
     	drzewo.setBackground(Color.WHITE);
     	
+    	AdminPanel admin = new AdminPanel();
+        
+        //tabbedPane.remove(admin);
+    	
     	//------------------------------------Tree panel
     	
     	TreePanel drzewko = new TreePanel();
@@ -104,6 +108,7 @@ public class Okno {
         
         cards = new JPanel(new CardLayout());
         tabbedPane.addTab("Sklep", cards);
+        
         //cards.setPreferredSize(new Dimension(800, 500));
         
         //------------------------------------Generowanie paneli
@@ -113,7 +118,9 @@ public class Okno {
         
         JPanel panel_1 = new JPanel();
         cards.add(panel_1, "KOSZYK");
+
         cl = (CardLayout)(cards.getLayout());
+        
         
         //------------------------------------Panel logowania
   
@@ -138,7 +145,7 @@ public class Okno {
         gbc_lblRejestracja.gridy = 0;
         panel.add(lblRejestracja, gbc_lblRejestracja);
         
-        JLabel login = new JLabel("Nazwa użytkownika:");
+        JLabel login = new JLabel("Nazwa użytkownika");
         GridBagConstraints gbc_login = new GridBagConstraints();
         gbc_login.insets = new Insets(0, 0, 5, 5);
         gbc_login.gridx = 1;
@@ -170,7 +177,7 @@ public class Okno {
         gbc_textField_1.gridy = 2;
         panel.add(textField_1, gbc_textField_1);
         textField_1.setColumns(10);
-        JLabel password = new JLabel("Hasło:");
+        JLabel password = new JLabel("Hasło");
         GridBagConstraints gbc_password = new GridBagConstraints();
         gbc_password.anchor = GridBagConstraints.WEST;
         gbc_password.insets = new Insets(0, 0, 5, 5);
@@ -220,26 +227,14 @@ public class Okno {
         panel.add(textField_3, gbc_textField_3);
         textField_3.setColumns(10);
         
-              JButton btnZaloguj = new JButton("Zaloguj");
+        JButton btnZaloguj = new JButton("Zaloguj");
               
-                      GridBagConstraints gbc_btnZaloguj = new GridBagConstraints();
-                      gbc_btnZaloguj.insets = new Insets(0, 0, 5, 5);
-                      gbc_btnZaloguj.gridx = 3;
-                      gbc_btnZaloguj.gridy = 5;
-                      panel.add(btnZaloguj, gbc_btnZaloguj);
-                      
-                      //------------------------------------ActionListenery dla logowania i wylogowania
-                      
-                      btnZaloguj.addActionListener(new ActionListener() {
-                      	
-                      	public void actionPerformed(ActionEvent arg0) {
-                      		Database.userlogin(textField.getText(),passwordField.getText());
-                      		String name=User.username;
-                      		label.setText(name);
-                      		cl.show(cards, "KOSZYK");
-                      	}
-                      });        
-        
+        GridBagConstraints gbc_btnZaloguj = new GridBagConstraints();
+        gbc_btnZaloguj.insets = new Insets(0, 0, 5, 5);
+        gbc_btnZaloguj.gridx = 3;
+        gbc_btnZaloguj.gridy = 5;
+        panel.add(btnZaloguj, gbc_btnZaloguj);
+                                          
         JLabel lblNazwisko = new JLabel("Nazwisko");
         GridBagConstraints gbc_lblNazwisko = new GridBagConstraints();
         gbc_lblNazwisko.anchor = GridBagConstraints.WEST;
@@ -360,12 +355,38 @@ public class Okno {
         gbc_lblNaleno.gridx = 3;
         gbc_lblNaleno.gridy = 3;
         panel_1.add(lblNaleno, gbc_lblNaleno);
+
+        //------------------------------------ActionListenery dla logowania i wylogowania
+        
+        btnZaloguj.addActionListener(new ActionListener() {
+        	
+        	public void actionPerformed(ActionEvent arg0) {
+        		Database.userlogin(textField.getText(),passwordField.getText());
+        		String name=User.username;
+        		label.setText(name);
+        		cl.show(cards, "KOSZYK");
+        	}
+        });     
         
         btnWyloguj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		User.LogOut();
         		label.setText("Nie zalogowany");
         		cl.show(cards, "LOGOWANIE");
+        	}
+        });
+        
+        btnZarejestruj.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		String username=textField_1.getText();
+        		String haslo=textField_2.getText();
+        		String imie=textField_3.getText();
+        		String nazwisko=textField_4.getText();
+        		String adres=textField_5.getText();
+        		String telefon=textField_6.getText();
+        		
+        		Database.register(username,haslo,imie,nazwisko,adres,telefon);
+        		cl.show(cards, "KOSZYK");
         	}
         });
         
