@@ -48,8 +48,12 @@ public class TreePanel extends JPanel
 	void doMouseClicked(MouseEvent me) {
 	    TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
 	    if (tp != null)
+	    {
 	      System.out.println("Kliknieto: "+tp.toString());
-	    else
+	      if(tp.toString().equals("[Alfa Romeo, 156, Układ napędowy]"))
+		      System.out.println("kliknales uklad napedowy buebue bue chuj.");
+	    }
+	      else
 		  System.out.println("Rozwijam.");
 
 	  }
