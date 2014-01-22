@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author Mateusz
- *
- */
-package pzprojekt;
