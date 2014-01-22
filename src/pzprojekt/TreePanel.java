@@ -1,11 +1,14 @@
 package pzprojekt;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 public class TreePanel extends JPanel 
 {
@@ -34,6 +37,20 @@ public class TreePanel extends JPanel
 	    	}
 	    ));
 	    tree.setBounds(0, 0, 257, 427);
+
+	    tree.addMouseListener(new MouseAdapter() {
+	      public void mouseClicked(MouseEvent m) {
+	        doMouseClicked(m);
+	      }
+	    });
 	    this.add(tree);
 	}
+	void doMouseClicked(MouseEvent me) {
+	    TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
+	    if (tp != null)
+	      System.out.println("Kliknieto: "+tp.toString());
+	    else
+		  System.out.println("Rozwijam.");
+
+	  }
 }
