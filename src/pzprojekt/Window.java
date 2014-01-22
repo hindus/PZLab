@@ -54,7 +54,7 @@ public class Window extends JPanel {
     	pan1pan1.setBackground(Color.WHITE);
     	
     	TreePanel drzewko = new TreePanel();
-        pan1pan1.add(drzewko);
+        //pan1pan1.add(drzewko);
         
         ImagePanel a = new ImagePanel();
         
