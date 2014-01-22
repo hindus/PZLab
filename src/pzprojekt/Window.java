@@ -12,7 +12,6 @@ import javax.swing.JComponent;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 
 
@@ -39,9 +38,6 @@ import java.awt.Insets;
 import javax.swing.BoxLayout;
 
 import java.awt.FlowLayout;
-import javax.swing.tree.DefaultTreeModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
  
 public class Window extends JPanel {
         private JTextField textField;
@@ -57,17 +53,6 @@ public class Window extends JPanel {
     	pan1pan1.setBackground(Color.WHITE);
 
         ImagePanel a = new ImagePanel();
-        a.addMouseMotionListener(new MouseAdapter() {
-        	@Override
-        	public void mouseMoved(MouseEvent arg0) {
-        		int x=arg0.getX(), y=arg0.getY();
-        		
-        		if(x>100 && x<400 && y>200 && y<400)
-        			System.out.println("Jesteś w obszarze\n");
-        		
-        		System.out.println("x: "+x+" y:"+y);
-        	}
-        });
         pan1.setDividerLocation(130);
         pan1.setLeftComponent(pan1pan1);
         //pan1.setRightComponent(pan1pan2);
@@ -150,23 +135,6 @@ public class Window extends JPanel {
         pan1pan1.setLayout(null);
         
         JTree tree = new JTree();
-        tree.setModel(new DefaultTreeModel(
-        	new DefaultMutableTreeNode("JTree") {
-        		{
-        			DefaultMutableTreeNode node_1;
-        			node_1 = new DefaultMutableTreeNode("156");
-        				node_1.add(new DefaultMutableTreeNode("układ wydechowy"));
-        				node_1.add(new DefaultMutableTreeNode("układ hamulcowy"));
-        				node_1.add(new DefaultMutableTreeNode("układ napędowy"));
-        			add(node_1);
-        			node_1 = new DefaultMutableTreeNode("159");
-        				node_1.add(new DefaultMutableTreeNode("układ wydechowy"));
-        				node_1.add(new DefaultMutableTreeNode("układ hamulcowy"));
-        				node_1.add(new DefaultMutableTreeNode("układ napędowy"));
-        			add(node_1);
-        		}
-        	}
-        ));
         tree.setBounds(0, 0, 249, 427);
         pan1pan1.add(tree);
         add(tabbedPane);
