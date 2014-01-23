@@ -25,6 +25,7 @@ import java.awt.Insets;
 import java.awt.CardLayout;
 import java.util.Vector;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class Okno {
 
@@ -354,26 +355,30 @@ public class Okno {
         btnWyloguj.setBounds(660, 11, 94, 29);
         panel_1.add(btnWyloguj);
         
-        JLabel lblNazwaPrzedmiotu = new JLabel("Nazwa przedmiotu");
-        lblNazwaPrzedmiotu.setBounds(102, 65, 117, 16);
-        panel_1.add(lblNazwaPrzedmiotu);
-        
-        JLabel lblSztuk = new JLabel("Sztuk");
-        lblSztuk.setBounds(596, 65, 35, 16);
-        panel_1.add(lblSztuk);
-        
         //------------------------------------TABELA
         Object[][] data = {
-        	    {"Jakiś przedmiot", new Integer(100), new Integer(1), 100}
+        	    {"Jakiś przedmiot", new Integer(100), new Integer(1), 100}      	 
         	};
         Object[] kolumny = {"Przedmiot",
                 "Cena",
                 "Ilość",
                 "Wartość"};
         
+        JLabel lblcznie = new JLabel("ŁĄCZNIE:");
+        lblcznie.setBounds(496, 394, 61, 16);
+        panel_1.add(lblcznie);
+        
+        JButton btnZamw = new JButton("Zamów");
+        btnZamw.setBounds(637, 389, 117, 29);
+        panel_1.add(btnZamw);
+        
         table = new JTable(data, kolumny);
-        table.setBounds(6, 93, 765, 333);
-        panel_1.add(table);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(6, 44, 767, 338);
+        panel_1.add(scrollPane);
+        
+        
+        //scrollPane.setColumnHeaderView(table);
         
         
 
@@ -463,5 +468,4 @@ public class Okno {
 				return order.get(0);
 			}
     	}
-
 }
