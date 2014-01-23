@@ -9,6 +9,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,15 +26,20 @@ import java.awt.GridBagConstraints;
 import javax.swing.JPasswordField;
 import java.awt.Insets;
 import java.awt.CardLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
 
 public class Okno {
 
@@ -46,6 +52,7 @@ public class Okno {
     private JTree drzewko;
     private CardLayout cl;
     public static CardLayout clep;
+   
     private JTextField textField_1;
     private JTextField textField_2;
     private JTextField textField_3;
@@ -56,6 +63,11 @@ public class Okno {
     static Focus newPolicy;
     private JTable table;
     private JTable table_1;
+    private static DefaultTableModel model;
+    private JTextField textField_8;
+    private JTextField textField_9;
+    private JTextField textField_10;
+    private JTextField textField_11;
   
 
 	/**
@@ -85,6 +97,7 @@ public class Okno {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("serial")
 	private void initialize() {
 		
 		frame = new JFrame();
@@ -104,6 +117,7 @@ public class Okno {
     	drzewo.setBackground(Color.WHITE);
     	
     	AdminPanel admin = new AdminPanel();
+    	eper = new JPanel();
         
         //tabbedPane.remove(admin);
     	
@@ -130,13 +144,11 @@ public class Okno {
 	    ));
 	    drzewko.setBounds(0, 0, 257, 427);
     	
-        eper = new JPanel(new CardLayout());
+        
         
         //------------------------------------Mapowanie imagePanel
         
         ImageMap listener = new ImageMap();
-        eper.addMouseListener(listener);
-        eper.addMouseMotionListener(listener);
         
         //------------------------------------Ustawienia splitPane
         
@@ -145,43 +157,60 @@ public class Okno {
         splitpanel.setRightComponent(eper);
         
         ImagePanel imgpanel=new ImagePanel();
+        imgpanel.setBounds(-2720, -1400, 588, 428);
         
         
         tabbedPane.addTab("EPER", splitpanel);
         
-        //------------------------------------Dodawanie kart dla epera
-        
+        eper.addMouseListener(listener);
+        eper.addMouseMotionListener(listener);
+        eper.setLayout(null);
         eper.setLayout(new CardLayout(0, 0));
-        
-        Object[][] data1 = {
-        	    {"Jakiś przedmiot", new Integer(100), new Integer(1)}
-        	};
-        Object[] kolumny1 = {"Przedmiot",
+
+        Object[] nazwykolumn = {"Przedmiot",
                 "Cena",
                 "Ilość"};
-        
-        table_1 = new JTable(data1, kolumny1);
-        
+       
+        table_1 = new JTable(); 
         JScrollPane scrollPane_1 = new JScrollPane(table_1);
+        scrollPane_1.setBounds(-2720, -1400, 588, 428);
         scrollPane_1.setViewportView(table_1);
         
+        //------------------------------------Dodawanie kart dla epera
+       
+        JPanel details=new JPanel();
+                
         eper.add(imgpanel, "EPERp");
         eper.add(scrollPane_1, "TABELA");
-        clep=(CardLayout)(eper.getLayout());
-        //Okno.showEper("TABELA");
-        //clep.show(eper, "TABELA");
+        eper.add(details, "DETALE");
         
-        //a.addTab("Obrazek", )
+        clep=(CardLayout)(eper.getLayout());
+  
+        //------------------------------------Pobieranie wyników z bazy 
+        
+        model = new DefaultTableModel() {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };
+        
+        model.setColumnIdentifiers(nazwykolumn);
+
+        
+        table_1.setModel(model); 
+        table_1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table_1.setFillsViewportHeight(true);
+
+       
         
         //------------------------------------Dodawanie kart dla sklepu
         
         cards = new JPanel(new CardLayout());
         tabbedPane.addTab("Sklep", cards);
-        
-        //cards.setPreferredSize(new Dimension(800, 500));
-        
-        //------------------------------------Generowanie paneli
-        
+             
         JPanel panel = new JPanel();
         cards.add(panel, "LOGOWANIE");
         
@@ -425,10 +454,60 @@ public class Okno {
         panel_1.add(label);
         
         
-        //scrollPane.setColumnHeaderView(table);
+        //------------------------------------DETALE
         
+        details.setBounds(0, 0, 588, 428);
         
-
+        details.setLayout(null);
+        
+        JLabel lblDostpnaIlo = new JLabel("Dostępna ilość:");
+        lblDostpnaIlo.setBounds(25, 117, 98, 16);
+        details.add(lblDostpnaIlo);
+        
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(6, 156, 576, 158);
+        details.add(textArea);
+        
+        JLabel lblNazwaCzesci = new JLabel("Nazwa czesci");
+        lblNazwaCzesci.setBounds(25, 33, 188, 16);
+        details.add(lblNazwaCzesci);
+        
+        JLabel lblCena = new JLabel("Cena");
+        lblCena.setBounds(25, 89, 98, 16);
+        details.add(lblCena);
+        
+        JButton btnDodajDoKoszyka = new JButton("Dodaj do koszyka");
+        btnDodajDoKoszyka.setBounds(278, 359, 157, 29);
+        details.add(btnDodajDoKoszyka);
+        
+        JLabel lblSamochd = new JLabel("Samochód");
+        lblSamochd.setBounds(25, 61, 98, 16);
+        details.add(lblSamochd);
+        
+        textField_8 = new JTextField();
+        textField_8.setBounds(170, 55, 134, 28);
+        details.add(textField_8);
+        textField_8.setColumns(10);
+        
+        textField_9 = new JTextField();
+        textField_9.setBounds(170, 83, 134, 28);
+        details.add(textField_9);
+        textField_9.setColumns(10);
+        
+        textField_10 = new JTextField();
+        textField_10.setBounds(170, 111, 134, 28);
+        details.add(textField_10);
+        textField_10.setColumns(10);
+        
+        JLabel lblIle = new JLabel("Ile:");
+        lblIle.setBounds(447, 364, 25, 16);
+        details.add(lblIle);
+        
+        textField_11 = new JTextField();
+        textField_11.setBounds(472, 358, 73, 28);
+        details.add(textField_11);
+        textField_11.setColumns(10);
+        
         //------------------------------------ActionListenery dla przycisków
         
         btnZaloguj.addActionListener(new ActionListener() {
@@ -440,10 +519,10 @@ public class Okno {
         		passwordField.setText("");
         		cl.show(cards, "KOSZYK");
         		label.setText(User.imie+" "+User.nazwisko);
-        		clep.show(eper, "TABELA");
+        		//clep.show(eper, "TABELA");
         	}
         });     
-        
+          
         btnWyloguj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		User.LogOut();
@@ -483,7 +562,9 @@ public class Okno {
     		    if (tp != null)
     		    {
     		    	if(tp.getPathCount()>2){
+    		    		
     		    		System.out.println("Kliknieto: "+tp.toString());
+    		    		wypelnijTabele(tp.getPathComponent(1).toString(),tp.getPathComponent(2).toString());
     		      		Okno.showEper("TABELA");
     		    	} else {
     		    		Okno.showEper("EPERp");
@@ -491,8 +572,7 @@ public class Okno {
     		    } 
     		  }    		
     	});
-        
-                
+                    
         //------------------------------------Tabbed pane
         
         drzewo.setLayout(null);
@@ -519,6 +599,30 @@ public class Okno {
 		{
 			Okno.clep.show(eper, str);
 		}
+	
+	public static void wypelnijTabele(String samochod, String kategoria)
+		{
+		
+		if (model.getRowCount() > 0) {
+		    for (int i = model.getRowCount()-1;i>-1;i--) {
+		        model.removeRow(i);
+		    }
+		}
+		
+		ResultSet rs = Database.pobierzDane(samochod, kategoria);
+		
+        try {
+			while(rs.next())
+				{
+					String nazwa = rs.getString("nazwa");
+					String dostepnych = rs.getString("ilosc_dostepnych");
+					String cena = rs.getString("cena_szt"); 
+					model.addRow(new Object[]{nazwa, cena, dostepnych});
+				}
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}
+	}
 	
 	public static class Focus
     extends FocusTraversalPolicy

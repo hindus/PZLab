@@ -42,6 +42,24 @@ public class Database {
 			ex.printStackTrace();
 		}
 	}
+	
+	
+	public static ResultSet pobierzDane(String samochod, String kategoria){
+		
+		try {
+			st=con.createStatement();
+			String query = "select * from czesci where samochod='"+samochod+"' AND kategoria=(SELECT id_kat FROM kategorie WHERE nazwa='"+kategoria+"')";
+			rs=st.executeQuery(query);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;	
+	}
+	
+	
 	public static void userlogin(String username, String password)
 	{
 		try
