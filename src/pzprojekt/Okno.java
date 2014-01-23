@@ -15,9 +15,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FocusTraversalPolicy;
-import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.GridBagLayout;
@@ -32,7 +30,6 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -620,7 +617,8 @@ public class Okno {
 					model.addRow(new Object[]{nazwa, cena, dostepnych});
 				}
 		} catch (SQLException e) {
-				e.printStackTrace();
+				e.printStackTrace();//
+				
 		}
 	}
 	
