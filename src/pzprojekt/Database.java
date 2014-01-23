@@ -24,6 +24,38 @@ public class Database {
 			}
 	}
 	
+	public static void insert(String column, String value)
+	{
+		try
+		{
+			String query = "INSERT INTO "+column+" VALUES ('"+value+"')";
+			st=con.createStatement();
+			st.executeUpdate(query);		
+			st.close();
+		} 
+
+	catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	public static void delete(String column, String attribute, String value)
+	{
+		try
+		{
+			String query = "DELETE FROM "+column+" WHERE "+attribute+"="+value+"";
+			st=con.createStatement();
+			st.executeUpdate(query);		
+			st.close();
+		} 
+
+	catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
 	public static void register(String user, String haslo, String imie, String nazwisko, String adres, String telefon, String email)
 	{
 		try
