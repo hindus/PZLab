@@ -10,7 +10,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -30,6 +29,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
