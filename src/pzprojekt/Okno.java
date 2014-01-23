@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JTree;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -26,6 +28,12 @@ import java.awt.CardLayout;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Okno {
 
@@ -34,7 +42,10 @@ public class Okno {
     private JPasswordField passwordField;
     private JLabel label;
     private JPanel cards;
+    private static JPanel eper;
+    private JTree drzewko;
     private CardLayout cl;
+    public static CardLayout clep;
     private JTextField textField_1;
     private JTextField textField_2;
     private JTextField textField_3;
@@ -44,6 +55,7 @@ public class Okno {
     private JTextField textField_7;
     static Focus newPolicy;
     private JTable table;
+    private JTable table_1;
   
 
 	/**
@@ -97,23 +109,71 @@ public class Okno {
     	
     	//------------------------------------Tree panel
     	
-    	TreePanel drzewko = new TreePanel();
-        ImagePanel a = new ImagePanel();
+    	drzewko = new JTree();
+    	drzewko.setBackground(Color.WHITE);		
+	    drzewko.setModel(new DefaultTreeModel(
+	    	new DefaultMutableTreeNode("Alfa Romeo") {
+	    		{
+	    			DefaultMutableTreeNode node_1;
+	    			node_1 = new DefaultMutableTreeNode("156");
+	    				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
+	    				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
+	    				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
+	    			add(node_1);
+	    			node_1 = new DefaultMutableTreeNode("159");
+	    				node_1.add(new DefaultMutableTreeNode("Układ napędowy"));
+	    				node_1.add(new DefaultMutableTreeNode("Układ wydechowy"));
+	    				node_1.add(new DefaultMutableTreeNode("Układ hamulcowy"));
+	    			add(node_1);
+	    		}
+	    	}
+	    ));
+	    drzewko.setBounds(0, 0, 257, 427);
+    	
+        eper = new JPanel(new CardLayout());
         
         //------------------------------------Mapowanie imagePanel
         
         ImageMap listener = new ImageMap();
-        a.addMouseListener(listener);
-        a.addMouseMotionListener(listener);
+        eper.addMouseListener(listener);
+        eper.addMouseMotionListener(listener);
         
         //------------------------------------Ustawienia splitPane
         
         splitpanel.setDividerLocation(180);
         splitpanel.setLeftComponent(drzewko);
-        splitpanel.setRightComponent(a);
+        splitpanel.setRightComponent(eper);
+        
+        ImagePanel imgpanel=new ImagePanel();
+        
+        
         tabbedPane.addTab("EPER", splitpanel);
-
-        //------------------------------------Dodawanie kart
+        
+        //------------------------------------Dodawanie kart dla epera
+        
+        eper.setLayout(new CardLayout(0, 0));
+        
+        Object[][] data1 = {
+        	    {"Jakiś przedmiot", new Integer(100), new Integer(1)}
+        	};
+        Object[] kolumny1 = {"Przedmiot",
+                "Cena",
+                "Ilość"};
+        
+        table_1 = new JTable(data1, kolumny1);
+        
+        JScrollPane scrollPane_1 = new JScrollPane(table_1);
+        scrollPane_1.setViewportView(table_1);
+        
+        eper.add(imgpanel, "EPERp");
+        eper.add(scrollPane_1, "TABELA");
+        clep=(CardLayout)(eper.getLayout());
+        //Okno.showEper("TABELA");
+        //clep.show(eper, "TABELA");
+        
+        //a.addTab("Obrazek", )
+        
+        //------------------------------------Dodawanie kart dla sklepu
         
         cards = new JPanel(new CardLayout());
         tabbedPane.addTab("Sklep", cards);
@@ -380,6 +440,7 @@ public class Okno {
         		passwordField.setText("");
         		cl.show(cards, "KOSZYK");
         		label.setText(User.imie+" "+User.nazwisko);
+        		clep.show(eper, "TABELA");
         	}
         });     
         
@@ -387,7 +448,6 @@ public class Okno {
         	public void actionPerformed(ActionEvent arg0) {
         		User.LogOut();
         		cl.show(cards, "LOGOWANIE");
-
         	}
         });
         
@@ -411,15 +471,27 @@ public class Okno {
         		
         		Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
         		cl.show(cards, "KOSZYK");
-        		label.setText(User.imie+" "+User.nazwisko+" "+User.adres+" tel. "+User.telefon);
+        		label.setText(User.imie+" "+User.nazwisko);
         		Mail.sendRegister(email, username, imie, nazwisko, haslo);
         	}
         });
         
-        //------------------------------------Sterowanie kartami za pomocą klawiszy
+        drzewko.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mouseClicked(MouseEvent me) {
+    			TreePath tp = drzewko.getPathForLocation(me.getX(), me.getY());
+    		    if (tp != null)
+    		    {
+    		    	if(tp.getPathCount()>2){
+    		    		System.out.println("Kliknieto: "+tp.toString());
+    		      		Okno.showEper("TABELA");
+    		    	} else {
+    		    		Okno.showEper("EPERp");
+    		    	}
+    		    } 
+    		  }    		
+    	});
         
-        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
                 
         //------------------------------------Tabbed pane
         
@@ -442,6 +514,11 @@ public class Okno {
         frame.setFocusTraversalPolicy(newPolicy);
       
 	}
+	
+	public static void showEper(String str)
+		{
+			Okno.clep.show(eper, str);
+		}
 	
 	public static class Focus
     extends FocusTraversalPolicy
