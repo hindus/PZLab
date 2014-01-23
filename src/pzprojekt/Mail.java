@@ -14,8 +14,13 @@ import javax.swing.SwingWorker;
 
 public class Mail {
 
-    public static void sendRegister() {
-
+    public static void sendRegister(String mail, String username, String name, String surname, String password) {
+    	final String login=username;
+		final String imie=name;
+		final String nazwisko=surname;
+		final String haslo=password;
+		final String email=mail;
+		
     	SwingWorker<Void, Void> worker=new SwingWorker<Void, Void>() {
 
 			@Override
@@ -41,10 +46,11 @@ public class Mail {
                     Message message = new MimeMessage(session);
                     message.setFrom(new InternetAddress("mail@sysinf2011.vipserv.org"));
                     message.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse("hindu1@wp.pl"));
-                    message.setSubject("Testowy mail");
-                    message.setText("Dziękujemy za rejestrację w programie EPER"
-                        + "\n\n Twój login to: dupa");
+                        InternetAddress.parse(email));
+                    message.setSubject("Rejestracja w EPER");
+                    message.setText("Witaj "+imie+" "+nazwisko+"! \n\n Dziękujemy za rejestrację w programie EPER"
+                        + "\n\n Twój login to: "+login+"\n" 
+                    	+ "Hasło: "+haslo+"\n");
 
                     Transport.send(message);
 

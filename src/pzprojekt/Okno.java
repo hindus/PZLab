@@ -322,21 +322,7 @@ public class Okno {
         gbc_btnZarejestruj.gridy = 10;
         panel.add(btnZarejestruj, gbc_btnZarejestruj);
         
-        btnZarejestruj.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		String username=textField_1.getText();
-        		String haslo=textField_2.getText();
-        		String imie=textField_3.getText();
-        		String nazwisko=textField_4.getText();
-        		String adres=textField_5.getText();
-        		String telefon=textField_6.getText();
-        		String email=textField_7.getText();
-        		
-        		Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
-        		cl.show(cards, "KOSZYK");
-        		Mail.sendRegister();
-        	}
-        });
+        
 
         //------------------------------------Panel koszyka
 	    
@@ -346,16 +332,13 @@ public class Okno {
         JLabel lblZalogowanyJako = new JLabel("Zalogowany jako:");
         lblZalogowanyJako.setBounds(19, 16, 110, 16);
         panel_1.add(lblZalogowanyJako);
-        
-        label = new JLabel("");
-        label.setBounds(0, 0, 0, 0);
-        panel_1.add(label);
-        
+           
         JButton btnWyloguj = new JButton("Wyloguj");
         btnWyloguj.setBounds(660, 11, 94, 29);
         panel_1.add(btnWyloguj);
         
         //------------------------------------TABELA
+        
         Object[][] data = {
         	    {"Jakiś przedmiot", new Integer(100), new Integer(1), 100}      	 
         	};
@@ -377,28 +360,59 @@ public class Okno {
         scrollPane.setBounds(6, 44, 767, 338);
         panel_1.add(scrollPane);
         
+        label = new JLabel("");
+        label.setBounds(141, 16, 200, 16);
+        panel_1.add(label);
+        
         
         //scrollPane.setColumnHeaderView(table);
         
         
 
-        //------------------------------------ActionListenery dla logowania i wylogowania
+        //------------------------------------ActionListenery dla przycisków
         
         btnZaloguj.addActionListener(new ActionListener() {
         	
-        	public void actionPerformed(ActionEvent arg0) {
-        		Database.userlogin(textField.getText(),passwordField.getText());
-        		label.setText(User.imie+" "+User.nazwisko+" "+User.adres+" tel. "+User.telefon);
+        	@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent arg0) {
+        		Database.userlogin(textField.getText(),passwordField.getText());      		
+        		textField.setText("");
+        		passwordField.setText("");
         		cl.show(cards, "KOSZYK");
+        		label.setText(User.imie+" "+User.nazwisko);
         	}
         });     
         
         btnWyloguj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		User.LogOut();
-        		label.setText("Nie zalogowany");
         		cl.show(cards, "LOGOWANIE");
 
+        	}
+        });
+        
+        btnZarejestruj.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		String username=textField_1.getText();
+        		String haslo=textField_2.getText();
+        		String imie=textField_3.getText();
+        		String nazwisko=textField_4.getText();
+        		String adres=textField_5.getText();
+        		String telefon=textField_6.getText();
+        		String email=textField_7.getText();
+        		
+        		textField_1.setText("");
+        		textField_2.setText("");
+        		textField_3.setText("");
+        		textField_4.setText("");
+        		textField_5.setText("");
+        		textField_6.setText("");
+        		textField_7.setText("");
+        		
+        		Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
+        		cl.show(cards, "KOSZYK");
+        		label.setText(User.imie+" "+User.nazwisko+" "+User.adres+" tel. "+User.telefon);
+        		Mail.sendRegister(email, username, imie, nazwisko, haslo);
         	}
         });
         
