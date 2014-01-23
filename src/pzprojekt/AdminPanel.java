@@ -3,6 +3,8 @@ package pzprojekt;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AdminPanel extends JPanel 
+public class AdminPanel extends JPanel implements ActionListener
 {
 	public AdminPanel()
 	{
@@ -239,6 +241,11 @@ public class AdminPanel extends JPanel
 		gbc_button_4.gridx = 4;
 		gbc_button_4.gridy = 6;
 		this.add(button_4, gbc_button_4);
+		
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(e.toString());
 		
 	}
 }
