@@ -1,7 +1,7 @@
 package pzprojekt;
 
 public class User {
-	public static String username, imie, nazwisko, adres, telefon;
+	public static String username, imie, nazwisko, adres, telefon, email;
 	private static int zalogowany=0; 
 	
 	public static boolean isLogged(){
@@ -11,13 +11,14 @@ public class User {
 			return true;
 	}
 	
-	public static void LogIn(String user, String name, String surname, String address, String phone){
+	public static void LogIn(String user, String name, String surname, String address, String phone, String mail){
 		System.out.println("Zalogowany!");
 		username=user;
 		imie=name;
 		nazwisko=surname;
 		adres=address;
 		telefon=phone;
+		email=mail;
 		
 		zalogowany=1;
 	}

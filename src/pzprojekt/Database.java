@@ -24,11 +24,11 @@ public class Database {
 			}
 	}
 	
-	public static void register(String user, String haslo, String imie, String nazwisko, String adres, String telefon)
+	public static void register(String user, String haslo, String imie, String nazwisko, String adres, String telefon, String email)
 	{
 		try
 		{
-			String query = "INSERT INTO users VALUES ('"+user+"','"+haslo+"','"+imie+"','"+nazwisko+"','"+adres+"','"+telefon+"')";
+			String query = "INSERT INTO users (username, password, imie, nazwisko, adres, telefon, email) VALUES ('"+user+"','"+haslo+"','"+imie+"','"+nazwisko+"','"+adres+"','"+telefon+"','"+email+"')";
 			st=con.createStatement();
 			st.executeUpdate(query);
 			
@@ -59,8 +59,9 @@ public class Database {
 							String nazwisko=rs.getString("NAZWISKO");
 							String adres=rs.getString("ADRES");
 							String telefon=rs.getString("TELEFON");
+							String email=rs.getString("EMAIL");
 							
-							if(password.compareTo(password2)==0) User.LogIn(username, imie, nazwisko, adres, telefon);
+							if(password.compareTo(password2)==0) User.LogIn(username, imie, nazwisko, adres, telefon, email);
 							//hasło poprawne, zaloguj i umieść dane w klasie User
 							//w innym przypadku obsługa
 					}

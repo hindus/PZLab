@@ -10,7 +10,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FocusTraversalPolicy;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,6 +23,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JPasswordField;
 import java.awt.Insets;
 import java.awt.CardLayout;
+import java.util.Vector;
+import javax.swing.JTable;
 
 public class Okno {
 
@@ -35,6 +40,9 @@ public class Okno {
     private JTextField textField_4;
     private JTextField textField_5;
     private JTextField textField_6;
+    private JTextField textField_7;
+    static Focus newPolicy;
+    private JTable table;
   
 
 	/**
@@ -126,9 +134,9 @@ public class Okno {
   
         GridBagLayout gbl_panel = new GridBagLayout();
         gbl_panel.columnWidths = new int[]{30, 0, 0, 201, 50, 0, 0, 198, 30, 0};
-        gbl_panel.rowHeights = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 30, 0, 0};
-        gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gbl_panel.rowHeights = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0};
+        gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+        gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         panel.setLayout(gbl_panel);
         
         JLabel lblLogowanie = new JLabel("Logowanie");
@@ -161,6 +169,14 @@ public class Okno {
         panel.add(textField, gbc_textField);
         textField.setColumns(10);
         
+        passwordField = new JPasswordField();
+        GridBagConstraints gbc_passwordField = new GridBagConstraints();
+        gbc_passwordField.insets = new Insets(0, 0, 5, 5);
+        gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_passwordField.gridx = 3;
+        gbc_passwordField.gridy = 3;
+        panel.add(passwordField, gbc_passwordField);
+        
         JLabel lblNazwaUytkownika = new JLabel("Nazwa użytkownika");
         GridBagConstraints gbc_lblNazwaUytkownika = new GridBagConstraints();
         gbc_lblNazwaUytkownika.anchor = GridBagConstraints.WEST;
@@ -177,6 +193,7 @@ public class Okno {
         gbc_textField_1.gridy = 2;
         panel.add(textField_1, gbc_textField_1);
         textField_1.setColumns(10);
+        
         JLabel password = new JLabel("Hasło");
         GridBagConstraints gbc_password = new GridBagConstraints();
         gbc_password.anchor = GridBagConstraints.WEST;
@@ -185,13 +202,14 @@ public class Okno {
         gbc_password.gridy = 3;
         panel.add(password, gbc_password);
         
-        passwordField = new JPasswordField();
-        GridBagConstraints gbc_passwordField = new GridBagConstraints();
-        gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-        gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-        gbc_passwordField.gridx = 3;
-        gbc_passwordField.gridy = 3;
-        panel.add(passwordField, gbc_passwordField);
+        JButton btnZaloguj = new JButton("Zaloguj");
+        
+        GridBagConstraints gbc_btnZaloguj = new GridBagConstraints();
+        gbc_btnZaloguj.fill = GridBagConstraints.HORIZONTAL;
+        gbc_btnZaloguj.insets = new Insets(0, 0, 5, 5);
+        gbc_btnZaloguj.gridx = 3;
+        gbc_btnZaloguj.gridy = 5;
+        panel.add(btnZaloguj, gbc_btnZaloguj);
         
         JLabel lblHaso = new JLabel("Hasło");
         GridBagConstraints gbc_lblHaso = new GridBagConstraints();
@@ -226,14 +244,6 @@ public class Okno {
         gbc_textField_3.gridy = 4;
         panel.add(textField_3, gbc_textField_3);
         textField_3.setColumns(10);
-        
-        JButton btnZaloguj = new JButton("Zaloguj");
-              
-        GridBagConstraints gbc_btnZaloguj = new GridBagConstraints();
-        gbc_btnZaloguj.insets = new Insets(0, 0, 5, 5);
-        gbc_btnZaloguj.gridx = 3;
-        gbc_btnZaloguj.gridy = 5;
-        panel.add(btnZaloguj, gbc_btnZaloguj);
                                           
         JLabel lblNazwisko = new JLabel("Nazwisko");
         GridBagConstraints gbc_lblNazwisko = new GridBagConstraints();
@@ -286,75 +296,86 @@ public class Okno {
         panel.add(textField_6, gbc_textField_6);
         textField_6.setColumns(10);
         
+        JLabel lblAdresEmail = new JLabel("Adres e-mail");
+        GridBagConstraints gbc_lblAdresEmail = new GridBagConstraints();
+        gbc_lblAdresEmail.anchor = GridBagConstraints.WEST;
+        gbc_lblAdresEmail.insets = new Insets(0, 0, 5, 5);
+        gbc_lblAdresEmail.gridx = 5;
+        gbc_lblAdresEmail.gridy = 8;
+        panel.add(lblAdresEmail, gbc_lblAdresEmail);
+        
+        textField_7 = new JTextField();
+        GridBagConstraints gbc_textField_7 = new GridBagConstraints();
+        gbc_textField_7.insets = new Insets(0, 0, 5, 5);
+        gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textField_7.gridx = 7;
+        gbc_textField_7.gridy = 8;
+        panel.add(textField_7, gbc_textField_7);
+        textField_7.setColumns(10);
+        
         JButton btnZarejestruj = new JButton("Zarejestruj");
         GridBagConstraints gbc_btnZarejestruj = new GridBagConstraints();
         gbc_btnZarejestruj.insets = new Insets(0, 0, 0, 5);
         gbc_btnZarejestruj.fill = GridBagConstraints.HORIZONTAL;
         gbc_btnZarejestruj.gridx = 7;
-        gbc_btnZarejestruj.gridy = 9;
+        gbc_btnZarejestruj.gridy = 10;
         panel.add(btnZarejestruj, gbc_btnZarejestruj);
+        
+        btnZarejestruj.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		String username=textField_1.getText();
+        		String haslo=textField_2.getText();
+        		String imie=textField_3.getText();
+        		String nazwisko=textField_4.getText();
+        		String adres=textField_5.getText();
+        		String telefon=textField_6.getText();
+        		String email=textField_7.getText();
+        		
+        		Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
+        		cl.show(cards, "KOSZYK");
+        		Mail.sendRegister();
+        	}
+        });
 
         //------------------------------------Panel koszyka
 	    
         panel_1.setBounds(6, 6, 439, 240);
-        
-        GridBagLayout gbl_panel_1 = new GridBagLayout();
-        gbl_panel_1.columnWidths = new int[]{33, 103, 147, 0, 0};
-        gbl_panel_1.rowHeights = new int[]{0, 15, 0, 0, 0, 0};
-        gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        panel_1.setLayout(gbl_panel_1);
+        panel_1.setLayout(null);
         
         JLabel lblZalogowanyJako = new JLabel("Zalogowany jako:");
-        GridBagConstraints gbc_lblZalogowanyJako = new GridBagConstraints();
-        gbc_lblZalogowanyJako.insets = new Insets(0, 0, 5, 5);
-        gbc_lblZalogowanyJako.gridx = 1;
-        gbc_lblZalogowanyJako.gridy = 0;
-        panel_1.add(lblZalogowanyJako, gbc_lblZalogowanyJako);
+        lblZalogowanyJako.setBounds(19, 16, 110, 16);
+        panel_1.add(lblZalogowanyJako);
         
         label = new JLabel("");
-        GridBagConstraints gbc_label = new GridBagConstraints();
-        gbc_label.insets = new Insets(0, 0, 5, 5);
-        gbc_label.gridx = 2;
-        gbc_label.gridy = 0;
-        panel_1.add(label, gbc_label);
+        label.setBounds(0, 0, 0, 0);
+        panel_1.add(label);
         
         JButton btnWyloguj = new JButton("Wyloguj");
-        GridBagConstraints gbc_btnWyloguj = new GridBagConstraints();
-        gbc_btnWyloguj.insets = new Insets(0, 0, 5, 0);
-        gbc_btnWyloguj.gridx = 3;
-        gbc_btnWyloguj.gridy = 0;
-        panel_1.add(btnWyloguj, gbc_btnWyloguj);
-        
-        JLabel label_1 = new JLabel("Zawartość Twojego koszyka:");
-        GridBagConstraints gbc_label_1 = new GridBagConstraints();
-        gbc_label_1.anchor = GridBagConstraints.WEST;
-        gbc_label_1.insets = new Insets(0, 0, 5, 5);
-        gbc_label_1.gridx = 1;
-        gbc_label_1.gridy = 2;
-        panel_1.add(label_1, gbc_label_1);
+        btnWyloguj.setBounds(660, 11, 94, 29);
+        panel_1.add(btnWyloguj);
         
         JLabel lblNazwaPrzedmiotu = new JLabel("Nazwa przedmiotu");
-        GridBagConstraints gbc_lblNazwaPrzedmiotu = new GridBagConstraints();
-        gbc_lblNazwaPrzedmiotu.anchor = GridBagConstraints.WEST;
-        gbc_lblNazwaPrzedmiotu.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNazwaPrzedmiotu.gridx = 1;
-        gbc_lblNazwaPrzedmiotu.gridy = 3;
-        panel_1.add(lblNazwaPrzedmiotu, gbc_lblNazwaPrzedmiotu);
+        lblNazwaPrzedmiotu.setBounds(102, 65, 117, 16);
+        panel_1.add(lblNazwaPrzedmiotu);
         
         JLabel lblSztuk = new JLabel("Sztuk");
-        GridBagConstraints gbc_lblSztuk = new GridBagConstraints();
-        gbc_lblSztuk.insets = new Insets(0, 0, 5, 5);
-        gbc_lblSztuk.gridx = 2;
-        gbc_lblSztuk.gridy = 3;
-        panel_1.add(lblSztuk, gbc_lblSztuk);
+        lblSztuk.setBounds(596, 65, 35, 16);
+        panel_1.add(lblSztuk);
         
-        JLabel lblNaleno = new JLabel("Należność");
-        GridBagConstraints gbc_lblNaleno = new GridBagConstraints();
-        gbc_lblNaleno.insets = new Insets(0, 0, 5, 0);
-        gbc_lblNaleno.gridx = 3;
-        gbc_lblNaleno.gridy = 3;
-        panel_1.add(lblNaleno, gbc_lblNaleno);
+        //------------------------------------TABELA
+        Object[][] data = {
+        	    {"Jakiś przedmiot", new Integer(100), new Integer(1), 100}
+        	};
+        Object[] kolumny = {"Przedmiot",
+                "Cena",
+                "Ilość",
+                "Wartość"};
+        
+        table = new JTable(data, kolumny);
+        table.setBounds(6, 93, 765, 333);
+        panel_1.add(table);
+        
+        
 
         //------------------------------------ActionListenery dla logowania i wylogowania
         
@@ -372,20 +393,7 @@ public class Okno {
         		User.LogOut();
         		label.setText("Nie zalogowany");
         		cl.show(cards, "LOGOWANIE");
-        	}
-        });
-        
-        btnZarejestruj.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		String username=textField_1.getText();
-        		String haslo=textField_2.getText();
-        		String imie=textField_3.getText();
-        		String nazwisko=textField_4.getText();
-        		String adres=textField_5.getText();
-        		String telefon=textField_6.getText();
-        		
-        		Database.register(username,haslo,imie,nazwisko,adres,telefon);
-        		cl.show(cards, "KOSZYK");
+
         	}
         });
         
@@ -398,7 +406,62 @@ public class Okno {
         
         drzewo.setLayout(null);
         //add(tabbedPane);
+        
+        Vector<Component> order = new Vector<Component>(7);
+        order.add(textField);
+        order.add(passwordField);
+        order.add(btnZaloguj);
+        order.add(textField_1);
+        order.add(textField_2);
+        order.add(textField_3);
+        order.add(textField_4);
+        order.add(textField_5);
+        order.add(textField_6);
+        order.add(textField_7);
+        order.add(btnZarejestruj);
+        newPolicy = new Focus(order);
+        frame.setFocusTraversalPolicy(newPolicy);
       
 	}
+	
+	public static class Focus
+    extends FocusTraversalPolicy
+    	{
+			Vector<Component> order;
+
+			public Focus(Vector<Component> order) {
+				this.order = new Vector<Component>(order.size());
+				this.order.addAll(order);
+			}
+			
+			public Component getComponentAfter(Container focusCycleRoot,
+                             Component aComponent)
+			{
+				int idx = (order.indexOf(aComponent) + 1) % order.size();
+				return order.get(idx);
+			}
+
+			public Component getComponentBefore(Container focusCycleRoot,
+                              Component aComponent)
+			{
+				int idx = order.indexOf(aComponent) - 1;
+				if (idx < 0) {
+					idx = order.size() - 1;
+				}
+				return order.get(idx);
+			}
+
+			public Component getDefaultComponent(Container focusCycleRoot) {
+				return order.get(0);
+			}
+
+			public Component getLastComponent(Container focusCycleRoot) {
+				return order.lastElement();
+			}
+
+			public Component getFirstComponent(Container focusCycleRoot) {
+				return order.get(0);
+			}
+    	}
 
 }
