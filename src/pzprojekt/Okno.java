@@ -85,7 +85,7 @@ public class Okno {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application.asdf
 	 */
 	public Okno() {
 		initialize();

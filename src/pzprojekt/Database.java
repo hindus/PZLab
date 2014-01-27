@@ -92,6 +92,16 @@ public class Database {
 	}
 	
 	
+	public boolean isAdmin(String username)
+	{
+		if(username == "krzychu" || username == "hindus" || username == "roszek")
+			return true;
+		else
+			return false;
+		
+	}
+	
+	
 	public static void userlogin(String username, String password)
 	{
 		try
