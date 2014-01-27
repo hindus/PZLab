@@ -91,18 +91,25 @@ public class Database {
 		return rs;	
 	}
 	
-	
-	public boolean isAdmin(String username)
+	public static boolean isAdmin(String username)
 	{
-		if(username == "krzychu" || username == "hindus" || username == "roszek")
+		String admin1 = "krzychu";
+		String admin2 = "mateusz";
+		String admin3 = "roszk";
+
+		if(username.equals(admin1) || username.equals(admin2) || username.equals(admin3))
+		{				
 			return true;
+		}
 		else
 			return false;
+
 		
 	}
 	
 	
-	public static void userlogin(String username, String password)
+	
+	public static boolean userlogin(String username, String password)
 	{
 		try
 			{
@@ -121,7 +128,13 @@ public class Database {
 							String telefon=rs.getString("TELEFON");
 							String email=rs.getString("EMAIL");
 							
-							if(password.compareTo(password2)==0) User.LogIn(username, imie, nazwisko, adres, telefon, email);
+							if(password.compareTo(password2)==0) 
+								{
+									User.LogIn(username, imie, nazwisko, adres, telefon, email);
+									return true;
+								}
+							else 
+								return false;
 							//hasło poprawne, zaloguj i umieść dane w klasie User
 							//w innym przypadku obsługa
 					}
@@ -138,6 +151,7 @@ public class Database {
 			{
 				ex.printStackTrace();
 			}
+		return false;
 	}
 	
 }

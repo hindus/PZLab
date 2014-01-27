@@ -10,22 +10,30 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.GridBagLayout;
+
 import javax.swing.JTextField;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JPasswordField;
+
 import java.awt.Insets;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,6 +44,7 @@ import javax.swing.tree.TreePath;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JTextArea;
 
 public class Okno {
@@ -106,16 +115,17 @@ public class Okno {
         
         //------------------------------------TabbedPane, główne okno
         
-        JTabbedPane tabbedPane = new JTabbedPane();
+        final JTabbedPane tabbedPane = new JTabbedPane();
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         JSplitPane splitpanel = new JSplitPane();
         JPanel drzewo = new JPanel();
     	drzewo.setBackground(Color.WHITE);
     	
-    	AdminPanel admin = new AdminPanel();
     	eper = new JPanel();
-        
+        final AdminPanel admin = new AdminPanel();
+//        tabbedPane.add(admin,"ADMINISTRACJA");
+//        admin.setVisible(false);
         //tabbedPane.remove(admin);
     	
     	//------------------------------------Tree panel
@@ -213,6 +223,9 @@ public class Okno {
         
         JPanel panel_1 = new JPanel();
         cards.add(panel_1, "KOSZYK");
+        
+//        AdminPanel admin = new AdminPanel();
+//        cards.add(admin, "ADMIN");
 
         cl = (CardLayout)(cards.getLayout());
         
@@ -511,12 +524,20 @@ public class Okno {
         	
         	@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-        		Database.userlogin(textField.getText(),passwordField.getText());      		
+        		if(Database.userlogin(textField.getText(),passwordField.getText())==true)
+        		{			
+	        		if(Database.isAdmin(textField.getText())==true)
+	        			{	
+		        			cl.show(cards, "KOSZYK");
+		        			tabbedPane.add(admin,"ADMINISTRACJA");
+	        			}
+	        		else
+	        			cl.show(cards, "KOSZYK");
+	        		label.setText(User.imie+" "+User.nazwisko);
+        		}	
         		textField.setText("");
         		passwordField.setText("");
-        		cl.show(cards, "KOSZYK");
-        		label.setText(User.imie+" "+User.nazwisko);
-        		//clep.show(eper, "TABELA");
+        		
         	}
         });     
           
@@ -591,6 +612,8 @@ public class Okno {
         frame.setFocusTraversalPolicy(newPolicy);
       
 	}
+	
+	
 	
 	public static void showEper(String str)
 		{
