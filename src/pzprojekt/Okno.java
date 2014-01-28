@@ -126,7 +126,7 @@ public class Okno {
         //------------------------------------SKLEP/KOSZYK
         
         cards = new JPanel(new CardLayout());
-        
+
         tabbedPane.addTab("LOGOWANIE", cards);
 
         UserPanel panel=new UserPanel();
