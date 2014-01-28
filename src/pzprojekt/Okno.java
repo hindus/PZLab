@@ -27,7 +27,7 @@ import javax.swing.tree.TreePath;
 
 public class Okno {
 	
-	private JFrame frame;
+	private static JFrame frame;
     private static JPanel cards;
     private static JPanel eper;
     private static ImagePanel imgpanel;
@@ -81,8 +81,8 @@ public class Okno {
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
-        AdminPanel admin=new AdminPanel();
-        
+        admin=new AdminPanel();
+        //tabbedPane.add("Administracja", admin);
 
         //------------------------------------Ustawienia splitPane
         
@@ -225,7 +225,7 @@ public class Okno {
 					String nazwa = rs.getString("nazwa");
 					String dostepnych = rs.getString("ilosc_dostepnych");
 					String cena = rs.getString("cena_szt"); 
-					model.addRow(new Object[]{nazwa, cena, dostepnych});
+					model.addRow(new Object[]{nazwa, cena+" zł", dostepnych+" zł"});
 				}
 		} catch (SQLException e) {
 				e.printStackTrace();//
@@ -283,5 +283,8 @@ public class Okno {
 	public static ImagePanel getImgpanel() {
 		return imgpanel;
 	}
-	
+
+	public static JFrame getFrame() {
+		return frame;
+	}
 }

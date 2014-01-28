@@ -1,7 +1,11 @@
 package pzprojekt;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -21,6 +25,7 @@ public class DetailsCard extends JPanel {
 	private JLabel lblDostpnaIlo;
 	private JTextArea textArea;
 	private JLabel lblIle;
+	private static JButton btnDodajDoKoszyka;
 	
 	public DetailsCard(){
 		this.setBounds(0, 0, 588, 428);
@@ -44,9 +49,11 @@ public class DetailsCard extends JPanel {
         lblCena.setBounds(25, 89, 98, 16);
         this.add(lblCena);
         
-        JButton btnDodajDoKoszyka = new JButton("Dodaj do koszyka");
+        btnDodajDoKoszyka = new JButton("Dodaj do koszyka");
+        btnDodajDoKoszyka.setEnabled(false);
         btnDodajDoKoszyka.setBounds(278, 359, 157, 29);
         this.add(btnDodajDoKoszyka);
+        
         
         lblSamochd = new JLabel("Samochód");
         lblSamochd.setBounds(25, 61, 98, 16);
@@ -78,6 +85,29 @@ public class DetailsCard extends JPanel {
         textField_11.setBounds(472, 358, 73, 28);
         this.add(textField_11);
         textField_11.setColumns(10);
+        
+        btnDodajDoKoszyka.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		String nazwa=lblNazwaCzesci.getText();
+        		String cena=textField_9.getText();
+        		String ilosc=textField_11.getText();
+        		
+        		if(!ilosc.equals("")){
+        		
+        		int wartosc=Integer.parseInt(ilosc)*Integer.parseInt(cena);
+        		
+        		
+        			
+        		ShoppingCard.getModel().addRow(new Object[]{nazwa, cena+" zł", ilosc, wartosc+" zł"});
+        		JOptionPane.showMessageDialog(Okno.getFrame(), "Dodano do koszyka");
+        		
+        		} else {
+        			JOptionPane.showMessageDialog(Okno.getFrame(), "Wpisz ilość");
+        		}
+        		
+        		textField_11.setText("");
+        	}
+        });
 	}
 
 	public JTextField getTextField_8() {
@@ -158,5 +188,9 @@ public class DetailsCard extends JPanel {
 
 	public void setLblIle(JLabel lblIle) {
 		this.lblIle = lblIle;
+	}
+	
+	public static JButton getBtnDodaj(){
+		return btnDodajDoKoszyka;
 	}
 }

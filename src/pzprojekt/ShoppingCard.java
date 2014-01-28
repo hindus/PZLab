@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +16,8 @@ public class ShoppingCard extends JPanel {
 	 */
 	private static final long serialVersionUID = 2324737019103682442L;
 	private JTable table;
-	private JLabel label;
+	private static JLabel label;
+	private static DefaultTableModel model;
 	
 	public ShoppingCard(){
 		this.setBounds(6, 6, 439, 240);
@@ -28,30 +31,43 @@ public class ShoppingCard extends JPanel {
         btnWyloguj.setBounds(660, 11, 94, 29);
         this.add(btnWyloguj);
         
-        //------------------------------------TABELA
-        
-        Object[][] data = {
-        	    {"Jakiś przedmiot", new Integer(100), new Integer(1), 100}      	 
-        	};
         Object[] kolumny = {"Przedmiot",
                 "Cena",
                 "Ilość",
                 "Wartość"};
         
+        table = new JTable();
+        
+        model = new DefaultTableModel() {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };
+        
+        model.setColumnIdentifiers(kolumny);
+        table.setModel(model);
+        
         JLabel lblcznie = new JLabel("ŁĄCZNIE:");
-        lblcznie.setBounds(496, 394, 61, 16);
+        lblcznie.setBounds(460, 394, 61, 16);
         this.add(lblcznie);
+        
+        JLabel lblKwota = new JLabel("kwota");
+        lblKwota.setBounds(530, 394, 61, 16);
+        this.add(lblKwota);
         
         JButton btnZamw = new JButton("Zamów");
         btnZamw.setBounds(637, 389, 117, 29);
         this.add(btnZamw);
         
-        table = new JTable(data, kolumny);
+        
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(6, 44, 767, 338);
         this.add(scrollPane);
         
-        label = new JLabel("");
+        label = new JLabel();
         label.setBounds(141, 16, 200, 16);
         this.add(label);
         
@@ -63,5 +79,13 @@ public class ShoppingCard extends JPanel {
         		Okno.showLogin("LOGOWANIE");
         	}
         });
+	}
+
+	public static DefaultTableModel getModel() {
+		return model;
+	}
+	
+	public static JLabel getLabel() {
+		return label;
 	}
 }

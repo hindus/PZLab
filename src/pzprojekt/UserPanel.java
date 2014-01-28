@@ -229,15 +229,18 @@ public UserPanel(){
 	        			{	
 		        			Okno.showLogin("KOSZYK");
 		        			//cl.show(cards, "KOSZYK");
-		        			Okno.getTabbedPane().add(Okno.getAdminPanel(),"Administracja");
+		        			Okno.getTabbedPane().add("Administracja", Okno.getAdminPanel());
 	        			}
 	        		else
 	        			//cl.show(cards, "KOSZYK");
 	        			Okno.showLogin("KOSZYK");
+	        			DetailsCard.getBtnDodaj().setEnabled(true);
+	        			ShoppingCard.getLabel().setText(User.imie+" "+User.nazwisko);
 	        		//label.setText(User.imie+" "+User.nazwisko);
         		}	
         		textField.setText("");
         		passwordField.setText("");
+        		
         		
         	}
         });     
