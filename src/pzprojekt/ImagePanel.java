@@ -55,7 +55,7 @@ public class ImagePanel extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+    	setPicture("default");
     	//setPicture("");
     	//1 -> default background
 //          image = ImageIO.read(new File("pics/eper2.jpg"));

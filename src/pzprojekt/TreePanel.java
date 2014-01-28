@@ -63,6 +63,7 @@ public class TreePanel extends JPanel {
 			    		}
 			    	}
 			    ));
+			
 
 	    this.setBounds(0, 0, 257, 427);
 	    this.add(tree);
