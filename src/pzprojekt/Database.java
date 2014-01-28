@@ -21,7 +21,7 @@ public class Database {
 		
 		catch (Exception ex)
 			{
-				System.out.println("wedrujaca dupa");ex.printStackTrace();
+				System.out.println("Błąd połączenia z serwerem mysql!");
 			}
 	}
 	
