@@ -1,6 +1,7 @@
 package pzprojekt;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Vector;
 
 public class Database {
@@ -76,13 +77,35 @@ public class Database {
 		}
 	}
 	
+	public static HashMap<String, String> pobierzInfo(String nazwa, String model){
+		HashMap<String, String> przedmiot=new HashMap<String, String>();
+		try {
+			st=con.createStatement();
+			String query = "select * from czesci where nazwa='"+nazwa+"' AND samochod='"+model+"'";
+			rs=st.executeQuery(query);
+			
+			while(rs.next()){
+				przedmiot.put("nazwa", rs.getString("nazwa"));
+				przedmiot.put("ilosc", rs.getString("ilosc_dostepnych"));
+				przedmiot.put("opis", rs.getString("opis"));
+				przedmiot.put("cena", rs.getString("cena_szt"));
+				przedmiot.put("model", rs.getString("samochod"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return przedmiot;	
+	}
+	
+	
 	public static ResultSet pobierzSamochody(){
 		
 		try {
 			st=con.createStatement();
 			String query = "select * from samochody";
 			rs=st.executeQuery(query);
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

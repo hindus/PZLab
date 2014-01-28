@@ -5,17 +5,25 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.ListSelectionModel;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
 import java.awt.CardLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.TreePath;
 
 public class Okno {
 	
@@ -29,6 +37,8 @@ public class Okno {
     private static Focus newPolicy;
     private JTable table_1;
     private static DefaultTableModel model;
+    private static DetailsCard details;
+    private static AdminPanel admin;
 
 
 	/**
@@ -64,16 +74,20 @@ public class Okno {
 		frame = new JFrame();
 		frame.setTitle("EPER");
 		frame.setBounds(100, 100, 800, 500);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        
         tabbedPane = new JTabbedPane();
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+        AdminPanel admin=new AdminPanel();
+        
 
         //------------------------------------Ustawienia splitPane
         
 	    JSplitPane splitpanel = new JSplitPane();
+	    splitpanel.setEnabled(false);
 	
     	eper = new JPanel();
     	JPanel drzewko = new TreePanel();
@@ -117,7 +131,7 @@ public class Okno {
         
         //------------------------------------Dodawanie kart dla epera
         
-        DetailsCard details=new DetailsCard();
+        details=new DetailsCard();
         
         eper.add(imgpanel, "EPERp");
         eper.add(scrollPane_1, "TABELA");
@@ -156,6 +170,30 @@ public class Okno {
         newPolicy = new Focus(order);
         frame.setFocusTraversalPolicy(newPolicy);
       
+        table_1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                   JTable target = (JTable)e.getSource();
+                   int row = target.getSelectedRow();
+//                   int column = target.getSelectedColumn();
+                   String nazwa = (String)target.getModel().getValueAt(row, 0);
+                   
+                   TreePath tp=TreePanel.getTree().getSelectionPath();
+                   String model=tp.getPathComponent(1).toString();
+                   
+                   HashMap<String, String> info=Database.pobierzInfo(nazwa, model);
+                   
+                   details.getLblNazwaCzesci().setText("<html><b>"+info.get("nazwa")+"</b></html>");
+                   details.getTextField_8().setText("Alfa Romeo "+info.get("model"));
+                   details.getTextField_9().setText(info.get("cena"));
+                   details.getTextField_10().setText(info.get("ilosc"));
+                   details.getTextArea().setText(info.get("opis"));
+                   
+                   Okno.showEper("DETALE");          
+                   }
+                
+             }
+          });
 	}
 	
 	
@@ -237,9 +275,9 @@ public class Okno {
 	public static JTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
-
-	public static void setTabbedPane(JTabbedPane tabbedPane) {
-		Okno.tabbedPane = tabbedPane;
+	
+	public static AdminPanel getAdminPanel() {
+		return admin;
 	}
 
 	public static ImagePanel getImgpanel() {

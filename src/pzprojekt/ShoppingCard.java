@@ -51,13 +51,14 @@ public class ShoppingCard extends JPanel {
         scrollPane.setBounds(6, 44, 767, 338);
         this.add(scrollPane);
         
-        label = new JLabel("Nie pamiętam");
+        label = new JLabel("");
         label.setBounds(141, 16, 200, 16);
         this.add(label);
         
         btnWyloguj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		User.LogOut();
+        		Okno.getTabbedPane().remove(Okno.getAdminPanel());
         		//cl.show(cards, "LOGOWANIE");
         		Okno.showLogin("LOGOWANIE");
         	}

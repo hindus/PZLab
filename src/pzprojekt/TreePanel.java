@@ -17,7 +17,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 public class TreePanel extends JPanel {
-	private JTree tree;
+	private static JTree tree;
 	
 	public TreePanel() {
 		this.setLayout(null);
@@ -25,9 +25,7 @@ public class TreePanel extends JPanel {
     	tree=new JTree();
     	
     	//------------------POBIERANIE SAMOCHODÓW
-    	
-    	
-    //	try {
+
 			tree.setModel(new DefaultTreeModel(
 			    	new DefaultMutableTreeNode("Alfa Romeo") {
 			    		{	    	    					
@@ -57,13 +55,11 @@ public class TreePanel extends JPanel {
 			    				}
 			    				
 			    			} catch (SQLException e) {
-			    				// TODO Auto-generated catch block
 			    				e.printStackTrace();
 			    			}
 			    		}
 			    	}
 			    ));
-			
 
 	    this.setBounds(0, 0, 257, 427);
 	    this.add(tree);
@@ -92,7 +88,7 @@ public class TreePanel extends JPanel {
 	    
 	}
 
-	public JTree getTree() {
+	public static JTree getTree() {
 		return tree;
 	}
 

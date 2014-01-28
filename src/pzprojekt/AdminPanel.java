@@ -16,12 +16,8 @@ public class AdminPanel extends JPanel implements ActionListener
 {
 	public AdminPanel()
 	{
-		
 		this.setBounds(0, 12, 697, 487);
 		this.setLayout(null);
-		
-
-	
 		this.setBounds(0, 0, 441, 456);
 		
 		GridBagLayout gbl_panel_1 = new GridBagLayout();

@@ -15,25 +15,32 @@ public class DetailsCard extends JPanel {
     private JTextField textField_9;
     private JTextField textField_10;
     private JTextField textField_11;
+    private JLabel lblNazwaCzesci;
+    private JLabel lblCena;
+    private JLabel lblSamochd;
+	private JLabel lblDostpnaIlo;
+	private JTextArea textArea;
+	private JLabel lblIle;
 	
 	public DetailsCard(){
 		this.setBounds(0, 0, 588, 428);
         
         this.setLayout(null);
         
-        JLabel lblDostpnaIlo = new JLabel("Dostępna ilość:");
+        lblDostpnaIlo = new JLabel("Dostępna ilość:");
         lblDostpnaIlo.setBounds(25, 117, 98, 16);
         this.add(lblDostpnaIlo);
         
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setBounds(6, 156, 576, 158);
         this.add(textArea);
+        textArea.setEditable(false);
         
-        JLabel lblNazwaCzesci = new JLabel("Nazwa czesci");
-        lblNazwaCzesci.setBounds(25, 33, 188, 16);
+        lblNazwaCzesci = new JLabel("Nazwa czesci");
+        lblNazwaCzesci.setBounds(25, 33, 500, 16);
         this.add(lblNazwaCzesci);
         
-        JLabel lblCena = new JLabel("Cena");
+        lblCena = new JLabel("Cena");
         lblCena.setBounds(25, 89, 98, 16);
         this.add(lblCena);
         
@@ -41,7 +48,7 @@ public class DetailsCard extends JPanel {
         btnDodajDoKoszyka.setBounds(278, 359, 157, 29);
         this.add(btnDodajDoKoszyka);
         
-        JLabel lblSamochd = new JLabel("Samochód");
+        lblSamochd = new JLabel("Samochód");
         lblSamochd.setBounds(25, 61, 98, 16);
         this.add(lblSamochd);
         
@@ -49,18 +56,21 @@ public class DetailsCard extends JPanel {
         textField_8.setBounds(170, 55, 134, 28);
         this.add(textField_8);
         textField_8.setColumns(10);
+        textField_8.setEditable(false);
         
         textField_9 = new JTextField();
         textField_9.setBounds(170, 83, 134, 28);
         this.add(textField_9);
         textField_9.setColumns(10);
+        textField_9.setEditable(false);
         
         textField_10 = new JTextField();
         textField_10.setBounds(170, 111, 134, 28);
         this.add(textField_10);
         textField_10.setColumns(10);
+        textField_10.setEditable(false);
         
-        JLabel lblIle = new JLabel("Ile:");
+        lblIle = new JLabel("Ile:");
         lblIle.setBounds(447, 364, 25, 16);
         this.add(lblIle);
         
@@ -68,5 +78,85 @@ public class DetailsCard extends JPanel {
         textField_11.setBounds(472, 358, 73, 28);
         this.add(textField_11);
         textField_11.setColumns(10);
+	}
+
+	public JTextField getTextField_8() {
+		return textField_8;
+	}
+
+	public void setTextField_8(JTextField textField_8) {
+		this.textField_8 = textField_8;
+	}
+
+	public JTextField getTextField_9() {
+		return textField_9;
+	}
+
+	public void setTextField_9(JTextField textField_9) {
+		this.textField_9 = textField_9;
+	}
+
+	public JTextField getTextField_10() {
+		return textField_10;
+	}
+
+	public void setTextField_10(JTextField textField_10) {
+		this.textField_10 = textField_10;
+	}
+
+	public JTextField getTextField_11() {
+		return textField_11;
+	}
+
+	public void setTextField_11(JTextField textField_11) {
+		this.textField_11 = textField_11;
+	}
+
+	public JLabel getLblNazwaCzesci() {
+		return lblNazwaCzesci;
+	}
+
+	public void setLblNazwaCzesci(JLabel lblNazwaCzesci) {
+		this.lblNazwaCzesci = lblNazwaCzesci;
+	}
+
+	public JLabel getLblCena() {
+		return lblCena;
+	}
+
+	public void setLblCena(JLabel lblCena) {
+		this.lblCena = lblCena;
+	}
+
+	public JLabel getLblSamochd() {
+		return lblSamochd;
+	}
+
+	public void setLblSamochd(JLabel lblSamochd) {
+		this.lblSamochd = lblSamochd;
+	}
+
+	public JLabel getLblDostpnaIlo() {
+		return lblDostpnaIlo;
+	}
+
+	public void setLblDostpnaIlo(JLabel lblDostpnaIlo) {
+		this.lblDostpnaIlo = lblDostpnaIlo;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
+
+	public JLabel getLblIle() {
+		return lblIle;
+	}
+
+	public void setLblIle(JLabel lblIle) {
+		this.lblIle = lblIle;
 	}
 }

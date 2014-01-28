@@ -229,7 +229,7 @@ public UserPanel(){
 	        			{	
 		        			Okno.showLogin("KOSZYK");
 		        			//cl.show(cards, "KOSZYK");
-		        			//Okno.getTabbedPane().add(admin,"ADMINISTRACJA");
+		        			Okno.getTabbedPane().add(Okno.getAdminPanel(),"Administracja");
 	        			}
 	        		else
 	        			//cl.show(cards, "KOSZYK");
