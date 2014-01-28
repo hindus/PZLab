@@ -26,15 +26,27 @@ public class ImagePanel extends JPanel{
     }
     
     
+    public void setPicture(int obrazek)
+    {
+    	try {
+    		if(obrazek==156)
+    			this.image = ImageIO.read(new File("pics/background/156.png"));
+    		if(obrazek==159)
+    			this.image = ImageIO.read(new File("pics/background/159.png"));
+    		else
+    			this.image = ImageIO.read(new File("pics/background/default.png"));
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     public ImagePanel() {
     	this.setBackground(Color.WHITE);
-       try {
-    	   
-          image = ImageIO.read(new File("pics/eper2.jpg"));
-       } catch (IOException ex) {
-           System.out.println("blad ladowania obrazka");
-
-       }
+    	setPicture(1);
+    	//1 -> default background
+//          image = ImageIO.read(new File("pics/eper2.jpg"));
     }
 
     @Override
