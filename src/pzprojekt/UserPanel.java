@@ -277,87 +277,43 @@ public JTextField getTextField() {
 	return textField;
 }
 
-public void setTextField(JTextField textField) {
-	this.textField = textField;
-}
-
 public JTextField getTextField_1() {
 	return textField_1;
-}
-
-public void setTextField_1(JTextField textField_1) {
-	this.textField_1 = textField_1;
 }
 
 public JTextField getTextField_2() {
 	return textField_2;
 }
 
-public void setTextField_2(JTextField textField_2) {
-	this.textField_2 = textField_2;
-}
-
 public JTextField getTextField_3() {
 	return textField_3;
-}
-
-public void setTextField_3(JTextField textField_3) {
-	this.textField_3 = textField_3;
 }
 
 public JTextField getTextField_4() {
 	return textField_4;
 }
 
-public void setTextField_4(JTextField textField_4) {
-	this.textField_4 = textField_4;
-}
-
 public JTextField getTextField_5() {
 	return textField_5;
-}
-
-public void setTextField_5(JTextField textField_5) {
-	this.textField_5 = textField_5;
 }
 
 public JTextField getTextField_6() {
 	return textField_6;
 }
 
-public void setTextField_6(JTextField textField_6) {
-	this.textField_6 = textField_6;
-}
-
 public JTextField getTextField_7() {
 	return textField_7;
-}
-
-public void setTextField_7(JTextField textField_7) {
-	this.textField_7 = textField_7;
 }
 
 public JPasswordField getPasswordField() {
 	return passwordField;
 }
 
-public void setPasswordField(JPasswordField passwordField) {
-	this.passwordField = passwordField;
-}
-
 public JButton getBtnZaloguj() {
 	return btnZaloguj;
 }
 
-public void setBtnZaloguj(JButton btnZaloguj) {
-	this.btnZaloguj = btnZaloguj;
-}
-
 public JButton getBtnZarejestruj() {
 	return btnZarejestruj;
-}
-
-public void setBtnZarejestruj(JButton btnZarejestruj) {
-	this.btnZarejestruj = btnZarejestruj;
 }
 }

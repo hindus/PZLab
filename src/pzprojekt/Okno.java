@@ -175,7 +175,6 @@ public class Okno {
                 if (e.getClickCount() == 2) {
                    JTable target = (JTable)e.getSource();
                    int row = target.getSelectedRow();
-//                   int column = target.getSelectedColumn();
                    String nazwa = (String)target.getModel().getValueAt(row, 0);
                    
                    TreePath tp=EperTree.getTree().getSelectionPath();
@@ -183,15 +182,14 @@ public class Okno {
                    
                    HashMap<String, String> info=Database.pobierzInfo(nazwa, model);
                    
-                   details.getLblNazwaCzesci().setText("<html><h2>"+info.get("nazwa")+"</h2></html>");
+                   details.getLblNazwaCzesci().setText("<html><b>"+info.get("nazwa")+"</b></html>");
                    details.getTextField_8().setText("Alfa Romeo "+info.get("model"));
                    details.getTextField_9().setText(info.get("cena"));
                    details.getTextField_10().setText(info.get("ilosc"));
                    details.getTextArea().setText(info.get("opis"));
                    
                    Okno.showEper("DETALE");          
-                   }
-                
+                   }                
              }
           });
 	}
@@ -225,7 +223,7 @@ public class Okno {
 					String nazwa = rs.getString("nazwa");
 					String dostepnych = rs.getString("ilosc_dostepnych");
 					String cena = rs.getString("cena_szt"); 
-					model.addRow(new Object[]{nazwa, cena+" zł", dostepnych+" zł"});
+					model.addRow(new Object[]{nazwa, cena+" zł", dostepnych});
 				}
 		} catch (SQLException e) {
 				e.printStackTrace();//

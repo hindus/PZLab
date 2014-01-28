@@ -17,6 +17,7 @@ public class UserBasket extends JPanel {
 	private static final long serialVersionUID = 2324737019103682442L;
 	private JTable table;
 	private static JLabel label;
+	private static JLabel lblKwota;
 	private static DefaultTableModel model;
 	
 	public UserBasket(){
@@ -31,10 +32,7 @@ public class UserBasket extends JPanel {
         btnWyloguj.setBounds(660, 11, 94, 29);
         this.add(btnWyloguj);
         
-        Object[] kolumny = {"Przedmiot",
-                "Cena",
-                "Ilość",
-                "Wartość"};
+        Object[] kolumny = {"Przedmiot", "Cena", "Ilość", "Wartość"};
         
         table = new JTable();
         
@@ -54,8 +52,8 @@ public class UserBasket extends JPanel {
         lblcznie.setBounds(460, 394, 61, 16);
         this.add(lblcznie);
         
-        JLabel lblKwota = new JLabel("kwota");
-        lblKwota.setBounds(530, 394, 61, 16);
+        lblKwota = new JLabel("");
+        lblKwota.setBounds(530, 394, 90, 16);
         this.add(lblKwota);
         
         JButton btnZamw = new JButton("Zamów");
@@ -79,6 +77,14 @@ public class UserBasket extends JPanel {
         		Okno.showLogin("LOGOWANIE");
         	}
         });
+	}
+	
+	public static void updateBskt(){
+		int koszt=0;
+		for(int i=0;i<model.getRowCount();i++){			
+			koszt+=Integer.parseInt(model.getValueAt(i, 3).toString().split(" ")[0]);
+		}
+		lblKwota.setText("<html><b>"+koszt+" zł</b></html>");
 	}
 
 	public static DefaultTableModel getModel() {

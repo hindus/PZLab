@@ -100,7 +100,7 @@ public class EperDetails extends JPanel {
         			
         		UserBasket.getModel().addRow(new Object[]{nazwa, cena+" zł", ilosc, wartosc+" zł"});
         		JOptionPane.showMessageDialog(Okno.getFrame(), "Dodano do koszyka");
-        		
+        		UserBasket.updateBskt();
         		} else {
         			JOptionPane.showMessageDialog(Okno.getFrame(), "Wpisz ilość");
         		}
@@ -114,82 +114,42 @@ public class EperDetails extends JPanel {
 		return textField_8;
 	}
 
-	public void setTextField_8(JTextField textField_8) {
-		this.textField_8 = textField_8;
-	}
-
 	public JTextField getTextField_9() {
 		return textField_9;
-	}
-
-	public void setTextField_9(JTextField textField_9) {
-		this.textField_9 = textField_9;
 	}
 
 	public JTextField getTextField_10() {
 		return textField_10;
 	}
 
-	public void setTextField_10(JTextField textField_10) {
-		this.textField_10 = textField_10;
-	}
-
 	public JTextField getTextField_11() {
 		return textField_11;
-	}
-
-	public void setTextField_11(JTextField textField_11) {
-		this.textField_11 = textField_11;
 	}
 
 	public JLabel getLblNazwaCzesci() {
 		return lblNazwaCzesci;
 	}
 
-	public void setLblNazwaCzesci(JLabel lblNazwaCzesci) {
-		this.lblNazwaCzesci = lblNazwaCzesci;
-	}
-
 	public JLabel getLblCena() {
 		return lblCena;
-	}
-
-	public void setLblCena(JLabel lblCena) {
-		this.lblCena = lblCena;
 	}
 
 	public JLabel getLblSamochd() {
 		return lblSamochd;
 	}
 
-	public void setLblSamochd(JLabel lblSamochd) {
-		this.lblSamochd = lblSamochd;
-	}
-
 	public JLabel getLblDostpnaIlo() {
 		return lblDostpnaIlo;
-	}
-
-	public void setLblDostpnaIlo(JLabel lblDostpnaIlo) {
-		this.lblDostpnaIlo = lblDostpnaIlo;
 	}
 
 	public JTextArea getTextArea() {
 		return textArea;
 	}
 
-	public void setTextArea(JTextArea textArea) {
-		this.textArea = textArea;
-	}
-
 	public JLabel getLblIle() {
 		return lblIle;
 	}
 
-	public void setLblIle(JLabel lblIle) {
-		this.lblIle = lblIle;
-	}
-	
 	public static JButton getBtnDodaj(){
 		return btnDodajDoKoszyka;
 	}
