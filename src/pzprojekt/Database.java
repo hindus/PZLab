@@ -209,5 +209,8 @@ public static Vector<String> pobierzKategorie(){
 			}
 		return false;
 	}
-	
+
+	public static Connection getCon() {
+		return con;
+	}
 }

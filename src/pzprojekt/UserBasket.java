@@ -1,5 +1,7 @@
 package pzprojekt;
 
+import java.sql.*;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -75,6 +77,43 @@ public class UserBasket extends JPanel {
         		Okno.getTabbedPane().remove(Okno.getAdminPanel());
         		//cl.show(cards, "LOGOWANIE");
         		Okno.showLogin("LOGOWANIE");
+        	}
+        });
+        
+        btnZamw.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		Connection con = Database.getCon();
+        		try {
+					Statement st=con.createStatement();
+					for(int i=0;i<model.getRowCount();i++){
+	        			String nazwa=(String) model.getValueAt(i, 0);
+	        			nazwa=nazwa.replaceAll("<html><b>", "");
+	        			nazwa=nazwa.replaceAll("</b></html>", "");
+	        			String ilosc=(String) model.getValueAt(i, 2);	        			
+	        			st.addBatch("UPDATE czesci SET ilosc_dostepnych=ilosc_dostepnych-'"+ilosc+"' WHERE nazwa='"+nazwa+"'");	        			
+	        		}
+					st.executeBatch();
+					st.close();
+					
+//					tutaj musi być kod do wrzucania zakupów do historii zakupów
+//					
+//					
+//					
+//					
+//					
+//					
+//					
+//					
+//					
+					for(int j=model.getRowCount()-1;j>=0;j--)
+					model.removeRow(j);
+					UserBasket.updateBskt();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 		
         	}
         });
 	}
