@@ -37,8 +37,6 @@ public class ImagePanel extends JPanel{
     	
     	try {
 			bufor.put("default",ImageIO.read(new File("pics/background/default.png")));
-			//bufor.put("156", ImageIO.read(new File("pics/background/156.png")));
-			//bufor.put("159", ImageIO.read(new File("pics/background/159.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
