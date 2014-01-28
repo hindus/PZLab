@@ -1,6 +1,7 @@
 package pzprojekt;
 
 import java.sql.*;
+import java.util.Vector;
 
 public class Database {
 
@@ -75,6 +76,38 @@ public class Database {
 		}
 	}
 	
+	public static ResultSet pobierzSamochody(){
+		
+		try {
+			st=con.createStatement();
+			String query = "select * from samochody";
+			rs=st.executeQuery(query);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;	
+	}
+	
+public static Vector<String> pobierzKategorie(){
+		Vector<String> kategorie=new Vector<String>();
+		try {
+			st=con.createStatement();
+			String query = "select * from kategorie";
+			rs=st.executeQuery(query);
+			
+			while(rs.next()){
+				kategorie.add(rs.getString("nazwa"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return kategorie;	
+	}
 	
 	public static ResultSet pobierzDane(String samochod, String kategoria){
 		

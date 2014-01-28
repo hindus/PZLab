@@ -18,14 +18,15 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Okno {
-
+	
 	private JFrame frame;
     private static JPanel cards;
     private static JPanel eper;
+    private static ImagePanel imgpanel;
     private static CardLayout cl;
-    public static CardLayout clep;
+    private static CardLayout clep;
     private static JTabbedPane tabbedPane;
-    static Focus newPolicy;
+    private static Focus newPolicy;
     private JTable table_1;
     private static DefaultTableModel model;
 
@@ -61,6 +62,7 @@ public class Okno {
 		//------------------------------------GŁÓWNE OKNO
 		
 		frame = new JFrame();
+		frame.setTitle("EPER");
 		frame.setBounds(100, 100, 800, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        
@@ -80,7 +82,7 @@ public class Okno {
         splitpanel.setLeftComponent(drzewko);
         splitpanel.setRightComponent(eper);
         
-        ImagePanel imgpanel=new ImagePanel();
+        imgpanel=new ImagePanel();
 
         tabbedPane.addTab("EPER", splitpanel);
   
@@ -127,7 +129,7 @@ public class Okno {
         
         cards = new JPanel(new CardLayout());
 
-        tabbedPane.addTab("LOGOWANIE", cards);
+        tabbedPane.addTab("Sklep", cards);
 
         UserPanel panel=new UserPanel();
         ShoppingCard panel_1=new ShoppingCard();
@@ -239,4 +241,9 @@ public class Okno {
 	public static void setTabbedPane(JTabbedPane tabbedPane) {
 		Okno.tabbedPane = tabbedPane;
 	}
+
+	public static ImagePanel getImgpanel() {
+		return imgpanel;
+	}
+	
 }
