@@ -216,7 +216,7 @@ public class Okno {
         //------------------------------------Dodawanie kart dla sklepu
         
         cards = new JPanel(new CardLayout());
-        tabbedPane.addTab("Sklep", cards);
+        tabbedPane.addTab("Skasdflep", cards);
              
         JPanel panel = new JPanel();
         cards.add(panel, "LOGOWANIE");
