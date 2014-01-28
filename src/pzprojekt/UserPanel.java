@@ -13,6 +13,10 @@ import java.awt.Insets;
 
 
 public class UserPanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8561051996348262316L;
 	private JTextField textField;
 	private JTextField textField_1;
     private JTextField textField_2;

@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ShoppingCard extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2324737019103682442L;
 	private JTable table;
 	private JLabel label;
 	

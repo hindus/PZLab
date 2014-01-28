@@ -7,6 +7,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class DetailsCard extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4009610015728591272L;
 	private JTextField textField_8;
     private JTextField textField_9;
     private JTextField textField_10;
