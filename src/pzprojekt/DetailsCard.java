@@ -42,7 +42,7 @@ public class DetailsCard extends JPanel {
         textArea.setEditable(false);
         
         lblNazwaCzesci = new JLabel("Nazwa czesci");
-        lblNazwaCzesci.setBounds(25, 33, 500, 16);
+        lblNazwaCzesci.setBounds(25, 25, 500, 25);
         this.add(lblNazwaCzesci);
         
         lblCena = new JLabel("Cena");

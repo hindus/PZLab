@@ -183,7 +183,7 @@ public class Okno {
                    
                    HashMap<String, String> info=Database.pobierzInfo(nazwa, model);
                    
-                   details.getLblNazwaCzesci().setText("<html><b>"+info.get("nazwa")+"</b></html>");
+                   details.getLblNazwaCzesci().setText("<html><h2>"+info.get("nazwa")+"</h2></html>");
                    details.getTextField_8().setText("Alfa Romeo "+info.get("model"));
                    details.getTextField_9().setText(info.get("cena"));
                    details.getTextField_10().setText(info.get("ilosc"));
