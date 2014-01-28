@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class DetailsCard extends JPanel {
+public class EperDetails extends JPanel {
 	/**
 	 * 
 	 */
@@ -27,7 +27,7 @@ public class DetailsCard extends JPanel {
 	private JLabel lblIle;
 	private static JButton btnDodajDoKoszyka;
 	
-	public DetailsCard(){
+	public EperDetails(){
 		this.setBounds(0, 0, 588, 428);
         
         this.setLayout(null);
@@ -98,7 +98,7 @@ public class DetailsCard extends JPanel {
         		
         		
         			
-        		ShoppingCard.getModel().addRow(new Object[]{nazwa, cena+" zł", ilosc, wartosc+" zł"});
+        		UserBasket.getModel().addRow(new Object[]{nazwa, cena+" zł", ilosc, wartosc+" zł"});
         		JOptionPane.showMessageDialog(Okno.getFrame(), "Dodano do koszyka");
         		
         		} else {

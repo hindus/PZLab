@@ -30,14 +30,14 @@ public class Okno {
 	private static JFrame frame;
     private static JPanel cards;
     private static JPanel eper;
-    private static ImagePanel imgpanel;
+    private static EperImage imgpanel;
     private static CardLayout cl;
     private static CardLayout clep;
     private static JTabbedPane tabbedPane;
     private static Focus newPolicy;
     private JTable table_1;
     private static DefaultTableModel model;
-    private static DetailsCard details;
+    private static EperDetails details;
     private static AdminPanel admin;
 
 
@@ -90,13 +90,13 @@ public class Okno {
 	    splitpanel.setEnabled(false);
 	
     	eper = new JPanel();
-    	JPanel drzewko = new TreePanel();
+    	JPanel drzewko = new EperTree();
         
         splitpanel.setDividerLocation(180);
         splitpanel.setLeftComponent(drzewko);
         splitpanel.setRightComponent(eper);
         
-        imgpanel=new ImagePanel();
+        imgpanel=new EperImage();
 
         tabbedPane.addTab("EPER", splitpanel);
   
@@ -131,7 +131,7 @@ public class Okno {
         
         //------------------------------------Dodawanie kart dla epera
         
-        details=new DetailsCard();
+        details=new EperDetails();
         
         eper.add(imgpanel, "EPERp");
         eper.add(scrollPane_1, "TABELA");
@@ -146,7 +146,7 @@ public class Okno {
         tabbedPane.addTab("Sklep", cards);
 
         UserPanel panel=new UserPanel();
-        ShoppingCard panel_1=new ShoppingCard();
+        UserBasket panel_1=new UserBasket();
         
         cards.add(panel, "LOGOWANIE");
         cards.add(panel_1, "KOSZYK");
@@ -178,7 +178,7 @@ public class Okno {
 //                   int column = target.getSelectedColumn();
                    String nazwa = (String)target.getModel().getValueAt(row, 0);
                    
-                   TreePath tp=TreePanel.getTree().getSelectionPath();
+                   TreePath tp=EperTree.getTree().getSelectionPath();
                    String model=tp.getPathComponent(1).toString();
                    
                    HashMap<String, String> info=Database.pobierzInfo(nazwa, model);
@@ -280,7 +280,7 @@ public class Okno {
 		return admin;
 	}
 
-	public static ImagePanel getImgpanel() {
+	public static EperImage getImgpanel() {
 		return imgpanel;
 	}
 

@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ShoppingCard extends JPanel {
+public class UserBasket extends JPanel {
 	/**
 	 * 
 	 */
@@ -19,7 +19,7 @@ public class ShoppingCard extends JPanel {
 	private static JLabel label;
 	private static DefaultTableModel model;
 	
-	public ShoppingCard(){
+	public UserBasket(){
 		this.setBounds(6, 6, 439, 240);
         this.setLayout(null);
         

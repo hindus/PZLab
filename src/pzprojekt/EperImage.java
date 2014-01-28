@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class ImagePanel extends JPanel{
+public class EperImage extends JPanel{
 	private static HashMap<String, BufferedImage> bufor;
     private BufferedImage image;
     private Image img;
@@ -31,7 +31,7 @@ public class ImagePanel extends JPanel{
     	repaint();
     }
     
-    public ImagePanel() {
+    public EperImage() {
     	bufor=new HashMap<String, BufferedImage>();
     	this.setBackground(Color.WHITE);
     	
@@ -51,7 +51,7 @@ public class ImagePanel extends JPanel{
 				String obrazek=rs.getString("obrazek");			    					
 				
 				try {
-					ImagePanel.getBufor().put(nazwa, ImageIO.read(new File(obrazek)));
+					EperImage.getBufor().put(nazwa, ImageIO.read(new File(obrazek)));
 				}
 				catch (IOException e) {
 					e.printStackTrace();
@@ -73,7 +73,7 @@ public class ImagePanel extends JPanel{
 	}
 
 	public static void setBufor(HashMap<String, BufferedImage> bufor) {
-		ImagePanel.bufor = bufor;
+		EperImage.bufor = bufor;
 	}
 
 }

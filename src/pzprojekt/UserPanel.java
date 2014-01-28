@@ -234,8 +234,8 @@ public UserPanel(){
 	        		else
 	        			//cl.show(cards, "KOSZYK");
 	        			Okno.showLogin("KOSZYK");
-	        			DetailsCard.getBtnDodaj().setEnabled(true);
-	        			ShoppingCard.getLabel().setText(User.imie+" "+User.nazwisko);
+	        			EperDetails.getBtnDodaj().setEnabled(true);
+	        			UserBasket.getLabel().setText(User.imie+" "+User.nazwisko);
 	        		//label.setText(User.imie+" "+User.nazwisko);
         		}	
         		textField.setText("");

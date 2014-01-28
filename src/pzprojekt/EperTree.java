@@ -16,10 +16,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-public class TreePanel extends JPanel {
+public class EperTree extends JPanel {
 	private static JTree tree;
 	
-	public TreePanel() {
+	public EperTree() {
 		this.setLayout(null);
     	this.setBackground(Color.WHITE);		
     	tree=new JTree();
