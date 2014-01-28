@@ -5,8 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
-import javax.swing.ListSelectionModel;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
@@ -20,8 +18,6 @@ import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.TreePath;
 
@@ -50,7 +46,7 @@ public class Okno {
 				try {
 					Database.dbconnect();
 					Okno window = new Okno();
-					window.frame.setVisible(true);
+					Okno.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -184,7 +180,7 @@ public class Okno {
                    
                    details.getLblNazwaCzesci().setText("<html><b>"+info.get("nazwa")+"</b></html>");
                    details.getTextField_8().setText("Alfa Romeo "+info.get("model"));
-                   details.getTextField_9().setText(info.get("cena"));
+                   details.getTextField_9().setText(info.get("cena")+" zł");
                    details.getTextField_10().setText(info.get("ilosc"));
                    details.getTextArea().setText(info.get("opis"));
                    

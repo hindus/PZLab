@@ -37,16 +37,9 @@ public class EperTree extends JPanel {
 			    				ResultSet rs=Database.pobierzSamochody();
 			    				while(rs.next())
 			    				{
-			    					String nazwa=rs.getString("nazwa");
-			    					String obrazek=rs.getString("obrazek");			    					
+			    					String nazwa=rs.getString("nazwa");				
 			    					
 			    					node = new DefaultMutableTreeNode(nazwa);
-//			    					try {
-//			    						ImagePanel.getBufor().put(nazwa, ImageIO.read(new File(obrazek)));
-//			    					}
-//			    					catch (IOException e) {
-//			    						e.printStackTrace();
-//			    					}
 			    					add(node);
 			    					
 			    					for(int i=0;i<kategorie.size();i++){

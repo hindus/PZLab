@@ -89,7 +89,7 @@ public class EperDetails extends JPanel {
         btnDodajDoKoszyka.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		String nazwa=lblNazwaCzesci.getText();
-        		String cena=textField_9.getText();
+        		String cena=textField_9.getText().split(" ")[0];
         		String ilosc=textField_11.getText();
         		
         		if(!ilosc.equals("")){
