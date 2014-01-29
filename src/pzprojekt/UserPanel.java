@@ -263,6 +263,8 @@ public UserPanel(){
 
 public static void rejestruj()
 {
+	
+	
 	String username=textField_1.getText();
 	String haslo=textField_2.getText();
 	String imie=textField_3.getText();
@@ -300,8 +302,11 @@ public static void loguj()
 		else
 			//cl.show(cards, "KOSZYK");
 			Okno.showLogin("KOSZYK");
+			Okno.getTabbedPane().setSelectedIndex(0);
 			EperDetails.getBtnDodaj().setEnabled(true);
 			UserBasket.getLabel().setText(User.imie+" "+User.nazwisko);
+			textField.setText("");
+			passwordField.setText("");
 		//label.setText(User.imie+" "+User.nazwisko);
 	}
 	else

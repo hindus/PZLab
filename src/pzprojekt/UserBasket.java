@@ -34,7 +34,7 @@ public class UserBasket extends JPanel {
         btnWyloguj.setBounds(660, 11, 94, 29);
         this.add(btnWyloguj);
         
-        Object[] kolumny = {"Przedmiot", "Model samochodu", "Cena", "Ilość", "Wartość"};
+        Object[] kolumny = {"Przedmiot", "Numer", "Model samochodu", "Cena", "Ilość", "Wartość"};
         
         table = new JTable();
         
@@ -76,8 +76,10 @@ public class UserBasket extends JPanel {
         		//cl.show(cards, "LOGOWANIE");
         		Okno.showLogin("LOGOWANIE");
         		
-        		for(int i=model.getRowCount();i>-1;i--)
+        		for(int i=model.getRowCount()-1;i>-1;i--)
         			model.removeRow(i);
+        		
+        		
         	}
         });
         
@@ -106,19 +108,20 @@ public class UserBasket extends JPanel {
 					for(int i=0;i<model.getRowCount();i++){
 						
 	        			String nazwa=(String) model.getValueAt(i, 0);
+	        			int id_czesci=Integer.parseInt((String)model.getValueAt(i, 1));
 	        			nazwa=nazwa.replaceAll("<html><b>", "");
 	        			nazwa=nazwa.replaceAll("</b></html>", "");
-	        			String ilosc=(String) model.getValueAt(i, 3);	 
-	        			String cena=(String) model.getValueAt(i, 2);
+	        			String ilosc=(String) model.getValueAt(i, 4);	 
+	        			String cena=(String) model.getValueAt(i, 3);
 	        			cena=cena.split(" ")[0];
-	        			String wartosc=(String) model.getValueAt(i, 4);
+	        			String wartosc=(String) model.getValueAt(i, 5);
 	        			wartosc=wartosc.split(" ")[0];
-	        			String autko=(String) model.getValueAt(i,1);	        			
+	        			String autko=(String) model.getValueAt(i,2);	        			
 	        			int cena1=Integer.parseInt(cena);
 	        			int wart1=Integer.parseInt(wartosc);
 	
-	        			st.addBatch("UPDATE czesci SET ilosc_dostepnych=ilosc_dostepnych-'"+ilosc+"' WHERE nazwa='"+nazwa+"' AND samochod='"+autko+"'");	   
-	        			st.addBatch("INSERT INTO historia (idZ, idKlienta, nazwa, liczba, cena, wartosc, samochod) VALUES ("+ajdizamowienia+","+User.userId+",'"+nazwa+"','"+ilosc+"',"+cena1+","+wart1+","+autko+")");
+	        			st.addBatch("UPDATE czesci SET ilosc_dostepnych=ilosc_dostepnych-'"+ilosc+"' WHERE id_czesci='"+id_czesci+"'");	   
+	        			st.addBatch("INSERT INTO historia (idZ, id_czesci, idKlienta, nazwa, liczba, cena, wartosc, samochod) VALUES ("+ajdizamowienia+","+id_czesci+","+User.userId+",'"+nazwa+"','"+ilosc+"',"+cena1+","+wart1+","+autko+")");
 	        		}
 					st.executeBatch();
 					st.close();
@@ -139,7 +142,7 @@ public class UserBasket extends JPanel {
 	public static void updateBskt(){
 		int koszt=0;
 		for(int i=0;i<model.getRowCount();i++){			
-			koszt+=Integer.parseInt(model.getValueAt(i, 4).toString().split(" ")[0]);
+			koszt+=Integer.parseInt(model.getValueAt(i, 5).toString().split(" ")[0]);
 		}
 		lblKwota.setText("<html><b>"+koszt+" zł</b></html>");
 	}

@@ -101,7 +101,7 @@ public class Okno {
         eper.setLayout(null);
         eper.setLayout(new CardLayout(0, 0));
 
-        Object[] nazwykolumn = {"Przedmiot",
+        Object[] nazwykolumn = {"Przedmiot", "Numer",
                 "Cena",
                 "Ilość"};
        
@@ -172,17 +172,18 @@ public class Okno {
                    JTable target = (JTable)e.getSource();
                    int row = target.getSelectedRow();
                    String nazwa = (String)target.getModel().getValueAt(row, 0);
-                   
-                   TreePath tp=EperTree.getTree().getSelectionPath();
-                   String model=tp.getPathComponent(1).toString();
-                   
-                   HashMap<String, String> info=Database.pobierzInfo(nazwa, model);
-                   
-                   details.getLblNazwaCzesci().setText("<html><b>"+info.get("nazwa")+"</b></html>");
-                   details.getTextField_8().setText("Alfa Romeo "+info.get("model"));
-                   details.getTextField_9().setText(info.get("cena")+" zł");
-                   details.getTextField_10().setText(info.get("ilosc"));
-                   details.getTextArea().setText(info.get("opis"));
+                   int ajdi = (Integer) target.getModel().getValueAt(row, 1);
+                   //int ajdi=Integer.parseInt(id);
+//                   TreePath tp=EperTree.getTree().getSelectionPath();
+//                   String model=tp.getPathComponent(1).toString();
+//                   
+                   HashMap<String, String> info=Database.pobierzInfo(ajdi);
+                   details.wypelnij(info);
+//                   details.getLblNazwaCzesci().setText("<html><b>"+info.get("nazwa")+"</b></html>");
+//                   details.getTextField_8().setText("Alfa Romeo "+info.get("model"));
+//                   details.getTextField_9().setText(info.get("cena")+" zł");
+//                   details.getTextField_10().setText(info.get("ilosc"));
+//                   details.getTextArea().setText(info.get("opis"));
                    
                    Okno.showEper("DETALE");          
                    }                
@@ -217,9 +218,10 @@ public class Okno {
 			while(rs.next())
 				{
 					String nazwa = rs.getString("nazwa");
+					int id=rs.getInt("id_czesci");
 					String dostepnych = rs.getString("ilosc_dostepnych");
 					String cena = rs.getString("cena_szt"); 
-					model.addRow(new Object[]{nazwa, cena+" zł", dostepnych});
+					model.addRow(new Object[]{nazwa, id, cena+" zł", dostepnych});
 				}
 		} catch (SQLException e) {
 				e.printStackTrace();//

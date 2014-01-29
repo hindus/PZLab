@@ -101,14 +101,15 @@ public class Database {
 		}
 	}
 	
-	public static HashMap<String, String> pobierzInfo(String nazwa, String model){
+	public static HashMap<String, String> pobierzInfo(int id){
 		HashMap<String, String> przedmiot=new HashMap<String, String>();
 		try {
 			st=con.createStatement();
-			String query = "select * from czesci where nazwa='"+nazwa+"' AND samochod='"+model+"'";
+			String query = "select * from czesci where id_czesci="+id;
 			rs=st.executeQuery(query);
 			
 			while(rs.next()){
+				przedmiot.put("id", id+"");
 				przedmiot.put("nazwa", rs.getString("nazwa"));
 				przedmiot.put("ilosc", rs.getString("ilosc_dostepnych"));
 				przedmiot.put("opis", rs.getString("opis"));

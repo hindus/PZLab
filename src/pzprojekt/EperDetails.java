@@ -2,6 +2,7 @@ package pzprojekt;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ public class EperDetails extends JPanel {
 	private JTextArea textArea;
 	private JLabel lblIle;
 	private static JButton btnDodajDoKoszyka;
+	private int idczesci;
 	
 	public EperDetails(){
 		this.setBounds(0, 0, 588, 428);
@@ -96,10 +98,8 @@ public class EperDetails extends JPanel {
         		if(!ilosc.equals("")){
         		
         		int wartosc=Integer.parseInt(ilosc)*Integer.parseInt(cena);
-        		
-        		
-        			
-        		UserBasket.getModel().addRow(new Object[]{nazwa, autko, cena+" zł", ilosc, wartosc+" zł"});
+
+        		UserBasket.getModel().addRow(new Object[]{nazwa, ""+idczesci, autko, cena+" zł", ilosc, wartosc+" zł"});
         		JOptionPane.showMessageDialog(Okno.getFrame(), "Dodano do koszyka");
         		UserBasket.updateBskt();
         		} else {
@@ -111,6 +111,15 @@ public class EperDetails extends JPanel {
         });
 	}
 
+	public void wypelnij(HashMap<String, String> info){
+		lblNazwaCzesci.setText("<html><b>"+info.get("nazwa")+"</b></html>");
+        textField_8.setText("Alfa Romeo "+info.get("model"));
+        textField_9.setText(info.get("cena")+" zł");
+        textField_10.setText(info.get("ilosc"));
+        textArea.setText(info.get("opis"));
+        idczesci=Integer.parseInt(info.get("id"));
+	}
+	
 	public JTextField getTextField_8() {
 		return textField_8;
 	}
