@@ -34,15 +34,13 @@ public class UserBasket extends JPanel {
         btnWyloguj.setBounds(660, 11, 94, 29);
         this.add(btnWyloguj);
         
-        Object[] kolumny = {"Przedmiot", "Cena", "Ilość", "Wartość"};
+        Object[] kolumny = {"Przedmiot", "Model samochodu", "Cena", "Ilość", "Wartość"};
         
         table = new JTable();
         
         model = new DefaultTableModel() {
-
             @Override
             public boolean isCellEditable(int row, int column) {
-               //all cells false
                return false;
             }
         };
@@ -77,6 +75,9 @@ public class UserBasket extends JPanel {
         		Okno.getTabbedPane().remove(Okno.getAdminPanel());
         		//cl.show(cards, "LOGOWANIE");
         		Okno.showLogin("LOGOWANIE");
+        		
+        		for(int i=model.getRowCount();i>-1;i--)
+        			model.removeRow(i);
         	}
         });
         
@@ -84,28 +85,44 @@ public class UserBasket extends JPanel {
         	public void actionPerformed(ActionEvent arg0) {
         		
         		Connection con = Database.getCon();
+        		
+        		Statement zam;
+				try {
+					zam = con.createStatement();
+					String kwota=lblKwota.getText().split(" ")[0];
+					kwota=kwota.replaceAll("<html><b>", "");
+					int war=Integer.parseInt(kwota);
+					String query="INSERT INTO zamowione (id_klienta, wartosc) VALUES ("+User.userId+", "+war+")";
+					zam.addBatch(query);
+					zam.executeBatch();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+        		int ajdizamowienia=Database.ostatnieZam(User.userId);
+        		
         		try {
 					Statement st=con.createStatement();
+					
 					for(int i=0;i<model.getRowCount();i++){
+						
 	        			String nazwa=(String) model.getValueAt(i, 0);
 	        			nazwa=nazwa.replaceAll("<html><b>", "");
 	        			nazwa=nazwa.replaceAll("</b></html>", "");
-	        			String ilosc=(String) model.getValueAt(i, 2);	        			
-	        			st.addBatch("UPDATE czesci SET ilosc_dostepnych=ilosc_dostepnych-'"+ilosc+"' WHERE nazwa='"+nazwa+"'");	        			
+	        			String ilosc=(String) model.getValueAt(i, 3);	 
+	        			String cena=(String) model.getValueAt(i, 2);
+	        			cena=cena.split(" ")[0];
+	        			String wartosc=(String) model.getValueAt(i, 4);
+	        			wartosc=wartosc.split(" ")[0];
+	        			String autko=(String) model.getValueAt(i,1);	        			
+	        			int cena1=Integer.parseInt(cena);
+	        			int wart1=Integer.parseInt(wartosc);
+	
+	        			st.addBatch("UPDATE czesci SET ilosc_dostepnych=ilosc_dostepnych-'"+ilosc+"' WHERE nazwa='"+nazwa+"' AND samochod='"+autko+"'");	   
+	        			st.addBatch("INSERT INTO historia (idZ, idKlienta, nazwa, liczba, cena, wartosc, samochod) VALUES ("+ajdizamowienia+","+User.userId+",'"+nazwa+"','"+ilosc+"',"+cena1+","+wart1+","+autko+")");
 	        		}
 					st.executeBatch();
 					st.close();
-					
-//					tutaj musi być kod do wrzucania zakupów do historii zakupów
-//					
-//					
-//					
-//					
-//					
-//					
-//					
-//					
-//					
+
 					for(int j=model.getRowCount()-1;j>=0;j--)
 					model.removeRow(j);
 					UserBasket.updateBskt();
@@ -122,7 +139,7 @@ public class UserBasket extends JPanel {
 	public static void updateBskt(){
 		int koszt=0;
 		for(int i=0;i<model.getRowCount();i++){			
-			koszt+=Integer.parseInt(model.getValueAt(i, 3).toString().split(" ")[0]);
+			koszt+=Integer.parseInt(model.getValueAt(i, 4).toString().split(" ")[0]);
 		}
 		lblKwota.setText("<html><b>"+koszt+" zł</b></html>");
 	}

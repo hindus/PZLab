@@ -91,14 +91,15 @@ public class EperDetails extends JPanel {
         		String nazwa=lblNazwaCzesci.getText();
         		String cena=textField_9.getText().split(" ")[0];
         		String ilosc=textField_11.getText();
-        		
+        		String autko=textField_8.getText();
+        		autko=autko.split(" ")[2];
         		if(!ilosc.equals("")){
         		
         		int wartosc=Integer.parseInt(ilosc)*Integer.parseInt(cena);
         		
         		
         			
-        		UserBasket.getModel().addRow(new Object[]{nazwa, cena+" zł", ilosc, wartosc+" zł"});
+        		UserBasket.getModel().addRow(new Object[]{nazwa, autko, cena+" zł", ilosc, wartosc+" zł"});
         		JOptionPane.showMessageDialog(Okno.getFrame(), "Dodano do koszyka");
         		UserBasket.updateBskt();
         		} else {

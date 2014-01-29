@@ -42,7 +42,6 @@ public class Database {
 				String driver = "com.mysql.jdbc.Driver"; 
 				Class.forName(driver);
 				con = DriverManager.getConnection("jdbc:mysql://"+adres+"/"+database,user,password);
-				//
 			} 
 		
 		catch (Exception ex)
@@ -188,7 +187,22 @@ public static Vector<String> pobierzKategorie(){
 		
 	}
 	
-	
+	public static int ostatnieZam(int userid){
+		int id=0;
+		try {
+			st=con.createStatement();
+			String query = "select id_zamowienia from zamowione where id_klienta="+userid+" ORDER BY 1 DESC LIMIT 1";
+			rs=st.executeQuery(query);
+			
+			while(rs.next()){
+				id=rs.getInt("id_zamowienia");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return id;	
+	}
 	
 	public static boolean userlogin(String username, String password)
 	{
@@ -208,10 +222,11 @@ public static Vector<String> pobierzKategorie(){
 							String adres=rs.getString("ADRES");
 							String telefon=rs.getString("TELEFON");
 							String email=rs.getString("EMAIL");
+							int id=rs.getInt("user_id");
 							
 							if(password.compareTo(password2)==0) 
 								{
-									User.LogIn(username, imie, nazwisko, adres, telefon, email);
+									User.LogIn(id, username, imie, nazwisko, adres, telefon, email);
 									return true;
 								}
 							else 
