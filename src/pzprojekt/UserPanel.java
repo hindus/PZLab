@@ -1,14 +1,21 @@
 package pzprojekt;
 
 import java.awt.event.ActionEvent;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.GridBagLayout;
+
 import javax.swing.JTextField;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JPasswordField;
+
 import java.awt.Insets;
 
 
@@ -17,7 +24,7 @@ public class UserPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 8561051996348262316L;
-	private JTextField textField;
+	private static JTextField textField;
 	private JTextField textField_1;
     private JTextField textField_2;
     private JTextField textField_3;
@@ -25,7 +32,7 @@ public class UserPanel extends JPanel{
     private JTextField textField_5;
     private JTextField textField_6;
     private JTextField textField_7;
-    private JPasswordField passwordField;
+    private static JPasswordField passwordField;
     private JButton btnZaloguj;
     private JButton btnZarejestruj;
  	
@@ -73,7 +80,18 @@ public UserPanel(){
 	    gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 	    gbc_passwordField.gridx = 3;
 	    gbc_passwordField.gridy = 3;
+	    
+
+	    
+	    passwordField.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	System.out.print("asdf");
+	        	loguj();
+	        }
+	    });
+	    
 	    this.add(passwordField, gbc_passwordField);
+	    
 	    
 	    JLabel lblNazwaUytkownika = new JLabel("Nazwa użytkownika");
 	    GridBagConstraints gbc_lblNazwaUytkownika = new GridBagConstraints();
@@ -222,28 +240,15 @@ public UserPanel(){
         btnZaloguj.addActionListener(new ActionListener() {
         	
         	@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent arg0) {
-        		if(Database.userlogin(textField.getText(),passwordField.getText())==true)
-        		{			
-	        		if(Database.isAdmin(textField.getText())==true)
-	        			{	
-		        			Okno.showLogin("KOSZYK");
-		        			//cl.show(cards, "KOSZYK");
-		        			Okno.getTabbedPane().add("Administracja", Okno.getAdminPanel());
-	        			}
-	        		else
-	        			//cl.show(cards, "KOSZYK");
-	        			Okno.showLogin("KOSZYK");
-	        			EperDetails.getBtnDodaj().setEnabled(true);
-	        			UserBasket.getLabel().setText(User.imie+" "+User.nazwisko);
-	        		//label.setText(User.imie+" "+User.nazwisko);
-        		}	
-        		textField.setText("");
-        		passwordField.setText("");
-        		
-        		
+			public void actionPerformed(ActionEvent arg0) 
+        	{
+        		loguj();
         	}
         });     
+        
+        
+        
+        
         
         btnZarejestruj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -272,6 +277,31 @@ public UserPanel(){
         });
           
 	}
+
+public static void loguj()
+{
+	if(Database.userlogin(textField.getText(),passwordField.getText())==true)
+	{			
+		if(Database.isAdmin(textField.getText())==true)
+			{	
+    			Okno.showLogin("KOSZYK");
+    			//cl.show(cards, "KOSZYK");
+    			Okno.getTabbedPane().add("Administracja", Okno.getAdminPanel());
+			}
+		else
+			//cl.show(cards, "KOSZYK");
+			Okno.showLogin("KOSZYK");
+			EperDetails.getBtnDodaj().setEnabled(true);
+			UserBasket.getLabel().setText(User.imie+" "+User.nazwisko);
+		//label.setText(User.imie+" "+User.nazwisko);
+	}
+	else
+	{
+		JOptionPane.showMessageDialog(Okno.getFrame(), "Nieprawidłowe dane!");
+		textField.setText("");
+		passwordField.setText("");
+	}
+}
 
 public JTextField getTextField() {
 	return textField;
