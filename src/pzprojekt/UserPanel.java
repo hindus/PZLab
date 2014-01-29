@@ -25,13 +25,13 @@ public class UserPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 8561051996348262316L;
 	private static JTextField textField;
-	private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
-    private JTextField textField_5;
-    private JTextField textField_6;
-    private JTextField textField_7;
+	private static JTextField textField_1;
+    private static JTextField textField_2;
+    private static JTextField textField_3;
+    private static JTextField textField_4;
+    private static JTextField textField_5;
+    private static JTextField textField_6;
+    private static JTextField textField_7;
     private static JPasswordField passwordField;
     private JButton btnZaloguj;
     private JButton btnZarejestruj;
@@ -80,12 +80,9 @@ public UserPanel(){
 	    gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 	    gbc_passwordField.gridx = 3;
 	    gbc_passwordField.gridy = 3;
-	    
-
-	    
+	   
 	    passwordField.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	        	System.out.print("asdf");
 	        	loguj();
 	        }
 	    });
@@ -226,6 +223,14 @@ public UserPanel(){
 	    gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
 	    gbc_textField_7.gridx = 7;
 	    gbc_textField_7.gridy = 8;
+	    //-----------------
+		textField_7.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	rejestruj();
+	        }
+	    });
+
+	    
 	    this.add(textField_7, gbc_textField_7);
 	    textField_7.setColumns(10);
 	    
@@ -247,36 +252,40 @@ public UserPanel(){
         });     
         
         
-        
-        
-        
         btnZarejestruj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		String username=textField_1.getText();
-        		String haslo=textField_2.getText();
-        		String imie=textField_3.getText();
-        		String nazwisko=textField_4.getText();
-        		String adres=textField_5.getText();
-        		String telefon=textField_6.getText();
-        		String email=textField_7.getText();
-        		
-        		textField_1.setText("");
-        		textField_2.setText("");
-        		textField_3.setText("");
-        		textField_4.setText("");
-        		textField_5.setText("");
-        		textField_6.setText("");
-        		textField_7.setText("");
-        		
-        		Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
-        		//cl.show(cards, "KOSZYK");
-        		Okno.showLogin("KOSZYK");
-        		//label.setText(User.imie+" "+User.nazwisko);
-        		Mail.sendRegister(email, username, imie, nazwisko, haslo);
+        		rejestruj();
         	}
         });
           
 	}
+
+
+public static void rejestruj()
+{
+	String username=textField_1.getText();
+	String haslo=textField_2.getText();
+	String imie=textField_3.getText();
+	String nazwisko=textField_4.getText();
+	String adres=textField_5.getText();
+	String telefon=textField_6.getText();
+	String email=textField_7.getText();
+	
+	textField_1.setText("");
+	textField_2.setText("");
+	textField_3.setText("");
+	textField_4.setText("");
+	textField_5.setText("");
+	textField_6.setText("");
+	textField_7.setText("");
+	
+	Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
+	//cl.show(cards, "KOSZYK");
+	Okno.showLogin("KOSZYK");
+	//label.setText(User.imie+" "+User.nazwisko);
+	Mail.sendRegister(email, username, imie, nazwisko, haslo);
+
+}
 
 public static void loguj()
 {
