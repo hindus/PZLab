@@ -27,7 +27,7 @@ public class UserBasket extends JPanel {
         this.setLayout(null);
         
         JLabel lblZalogowanyJako = new JLabel("Zalogowany jako:");
-        lblZalogowanyJako.setBounds(19, 16, 110, 16);
+        lblZalogowanyJako.setBounds(10, 16, 130, 16);
         this.add(lblZalogowanyJako);
            
         JButton btnWyloguj = new JButton("Wyloguj");
@@ -51,7 +51,7 @@ public class UserBasket extends JPanel {
         table.setModel(model);
         
         JLabel lblcznie = new JLabel("ŁĄCZNIE:");
-        lblcznie.setBounds(460, 394, 61, 16);
+        lblcznie.setBounds(460, 394, 81, 16);
         this.add(lblcznie);
         
         lblKwota = new JLabel("");
