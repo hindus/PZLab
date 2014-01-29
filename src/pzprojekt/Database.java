@@ -1,7 +1,11 @@
 package pzprojekt;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.Vector;
 
 public class Database {
@@ -9,14 +13,35 @@ public class Database {
 	static Connection con;
 	static Statement st;
 	static ResultSet rs;
+	static String adres; //mysql-717926.vipserv.org
+	static String user; //pzlab_user
+	static String password; //password
+	static String database;//pzlab_user
 	
 	public static void dbconnect()
 	{
+		Properties prop = new Properties();
+		InputStream input = null;
+		try {
+			 
+			input = new FileInputStream("props.properties");
+
+			prop.load(input);
+
+			adres=prop.getProperty("adres");
+			user=prop.getProperty("user");
+			password=prop.getProperty("password");
+			database=prop.getProperty("database");			
+	 
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} 
+		
 		try
 			{
 				String driver = "com.mysql.jdbc.Driver"; 
 				Class.forName(driver);
-				con = DriverManager.getConnection("jdbc:mysql://mysql-717926.vipserv.org/pzlab_user","pzlab_user","password");
+				con = DriverManager.getConnection("jdbc:mysql://"+adres+"/"+database,user,password);
 				//
 			} 
 		

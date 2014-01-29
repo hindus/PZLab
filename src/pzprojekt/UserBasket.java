@@ -109,6 +109,7 @@ public class UserBasket extends JPanel {
 					for(int j=model.getRowCount()-1;j>=0;j--)
 					model.removeRow(j);
 					UserBasket.updateBskt();
+					Okno.showEper("TABELA");
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
