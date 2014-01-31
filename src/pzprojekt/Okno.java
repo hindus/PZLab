@@ -19,7 +19,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.TreePath;
+//import javax.swing.tree.TreePath;
 
 public class Okno {
 	
@@ -170,7 +170,7 @@ public class Okno {
                 if (e.getClickCount() == 2) {
                    JTable target = (JTable)e.getSource();
                    int row = target.getSelectedRow();
-                   String nazwa = (String)target.getModel().getValueAt(row, 0);
+ //                  String nazwa = (String)target.getModel().getValueAt(row, 0);
                    int ajdi = (Integer) target.getModel().getValueAt(row, 1);
 //                   int ajdi=Integer.parseInt(id);
 //                   TreePath tp=EperTree.getTree().getSelectionPath();

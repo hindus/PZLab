@@ -217,23 +217,23 @@ public static Vector<String> pobierzKategorie(){
 				{
 					try
 					{
-							String password2 = rs.getString("PASSWORD");
-							String imie=rs.getString("IMIE");
-							String nazwisko=rs.getString("NAZWISKO");
-							String adres=rs.getString("ADRES");
-							String telefon=rs.getString("TELEFON");
-							String email=rs.getString("EMAIL");
-							int id=rs.getInt("user_id");
-							
-							if(password.compareTo(password2)==0 && !username.isEmpty()) 
-								{
-									User.LogIn(id, username, imie, nazwisko, adres, telefon, email);
-									return true;
-								}
-							else 
-								return false;
-							//hasło poprawne, zaloguj i umieść dane w klasie User
-							//w innym przypadku obsługa
+						String password2 = rs.getString("PASSWORD");
+						String imie=rs.getString("IMIE");
+						String nazwisko=rs.getString("NAZWISKO");
+						String adres=rs.getString("ADRES");
+						String telefon=rs.getString("TELEFON");
+						String email=rs.getString("EMAIL");
+						int id=rs.getInt("user_id");
+						
+						if(password.compareTo(password2)==0 && !username.isEmpty()) 
+							{
+								User.LogIn(id, username, imie, nazwisko, adres, telefon, email);
+								return true;
+							}
+						else 
+							return false;
+						//hasło poprawne, zaloguj i umieść dane w klasie User
+						//w innym przypadku obsługa
 					}
 					
 					catch(SQLException ex)
