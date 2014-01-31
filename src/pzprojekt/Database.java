@@ -225,7 +225,7 @@ public static Vector<String> pobierzKategorie(){
 							String email=rs.getString("EMAIL");
 							int id=rs.getInt("user_id");
 							
-							if(password.compareTo(password2)==0) 
+							if(password.compareTo(password2)==0 && !username.isEmpty()) 
 								{
 									User.LogIn(id, username, imie, nazwisko, adres, telefon, email);
 									return true;

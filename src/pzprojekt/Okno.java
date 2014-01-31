@@ -120,7 +120,6 @@ public class Okno {
         };
         
         model.setColumnIdentifiers(nazwykolumn);
-
         table_1.setModel(model); 
         table_1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table_1.setFillsViewportHeight(true);
@@ -173,7 +172,7 @@ public class Okno {
                    int row = target.getSelectedRow();
                    String nazwa = (String)target.getModel().getValueAt(row, 0);
                    int ajdi = (Integer) target.getModel().getValueAt(row, 1);
-                   //int ajdi=Integer.parseInt(id);
+//                   int ajdi=Integer.parseInt(id);
 //                   TreePath tp=EperTree.getTree().getSelectionPath();
 //                   String model=tp.getPathComponent(1).toString();
 //                   
@@ -189,9 +188,7 @@ public class Okno {
                    }                
              }
           });
-	}
-	
-	
+	}	
 	
 	public static void showEper(String str)
 		{

@@ -36,7 +36,7 @@ public class UserPanel extends JPanel{
     private JButton btnZaloguj;
     private JButton btnZarejestruj;
  	
-public UserPanel(){
+	public UserPanel(){
 	    GridBagLayout gbl_panel = new GridBagLayout();
 	    gbl_panel.columnWidths = new int[]{30, 0, 0, 201, 50, 0, 0, 198, 30, 0};
 	    gbl_panel.rowHeights = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 30, 30, 0, 0};
@@ -259,105 +259,105 @@ public UserPanel(){
         });
           
 	}
-
-
-public static void rejestruj()
-{
 	
 	
-	String username=textField_1.getText();
-	String haslo=textField_2.getText();
-	String imie=textField_3.getText();
-	String nazwisko=textField_4.getText();
-	String adres=textField_5.getText();
-	String telefon=textField_6.getText();
-	String email=textField_7.getText();
+	public static void rejestruj()
+	{
+		
+		
+		String username=textField_1.getText();
+		String haslo=textField_2.getText();
+		String imie=textField_3.getText();
+		String nazwisko=textField_4.getText();
+		String adres=textField_5.getText();
+		String telefon=textField_6.getText();
+		String email=textField_7.getText();
+		
+		textField_1.setText("");
+		textField_2.setText("");
+		textField_3.setText("");
+		textField_4.setText("");
+		textField_5.setText("");
+		textField_6.setText("");
+		textField_7.setText("");
+		
+		Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
+		//cl.show(cards, "KOSZYK");
+		Okno.showLogin("KOSZYK");
+		//label.setText(User.imie+" "+User.nazwisko);
+		Mail.sendRegister(email, username, imie, nazwisko, haslo);
 	
-	textField_1.setText("");
-	textField_2.setText("");
-	textField_3.setText("");
-	textField_4.setText("");
-	textField_5.setText("");
-	textField_6.setText("");
-	textField_7.setText("");
+	}
 	
-	Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
-	//cl.show(cards, "KOSZYK");
-	Okno.showLogin("KOSZYK");
-	//label.setText(User.imie+" "+User.nazwisko);
-	Mail.sendRegister(email, username, imie, nazwisko, haslo);
-
-}
-
-public static void loguj()
-{
-	if(Database.userlogin(textField.getText(),passwordField.getText())==true)
-	{			
-		if(Database.isAdmin(textField.getText())==true)
-			{	
-    			Okno.showLogin("KOSZYK");
-    			//cl.show(cards, "KOSZYK");
-    			Okno.getTabbedPane().add("Administracja", Okno.getAdminPanel());
-			}
+	public static void loguj()
+	{
+		if(Database.userlogin(textField.getText(),passwordField.getText())==true)
+		{			
+			if(Database.isAdmin(textField.getText())==true)
+				{	
+	    			Okno.showLogin("KOSZYK");
+	    			//cl.show(cards, "KOSZYK");
+	    			Okno.getTabbedPane().add("Administracja", Okno.getAdminPanel());
+				}
+			else
+				//cl.show(cards, "KOSZYK");
+				Okno.showLogin("KOSZYK");
+				Okno.getTabbedPane().setSelectedIndex(0);
+				EperDetails.getBtnDodaj().setEnabled(true);
+				UserBasket.getLabel().setText(User.imie+" "+User.nazwisko);
+				textField.setText("");
+				passwordField.setText("");
+			//label.setText(User.imie+" "+User.nazwisko);
+		}
 		else
-			//cl.show(cards, "KOSZYK");
-			Okno.showLogin("KOSZYK");
-			Okno.getTabbedPane().setSelectedIndex(0);
-			EperDetails.getBtnDodaj().setEnabled(true);
-			UserBasket.getLabel().setText(User.imie+" "+User.nazwisko);
+		{
+			JOptionPane.showMessageDialog(Okno.getFrame(), "Nieprawidłowe dane!");
 			textField.setText("");
 			passwordField.setText("");
-		//label.setText(User.imie+" "+User.nazwisko);
+		}
 	}
-	else
-	{
-		JOptionPane.showMessageDialog(Okno.getFrame(), "Nieprawidłowe dane!");
-		textField.setText("");
-		passwordField.setText("");
+	
+	public JTextField getTextField() {
+		return textField;
 	}
-}
-
-public JTextField getTextField() {
-	return textField;
-}
-
-public JTextField getTextField_1() {
-	return textField_1;
-}
-
-public JTextField getTextField_2() {
-	return textField_2;
-}
-
-public JTextField getTextField_3() {
-	return textField_3;
-}
-
-public JTextField getTextField_4() {
-	return textField_4;
-}
-
-public JTextField getTextField_5() {
-	return textField_5;
-}
-
-public JTextField getTextField_6() {
-	return textField_6;
-}
-
-public JTextField getTextField_7() {
-	return textField_7;
-}
-
-public JPasswordField getPasswordField() {
-	return passwordField;
-}
-
-public JButton getBtnZaloguj() {
-	return btnZaloguj;
-}
-
-public JButton getBtnZarejestruj() {
-	return btnZarejestruj;
-}
+	
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+	
+	public JTextField getTextField_2() {
+		return textField_2;
+	}
+	
+	public JTextField getTextField_3() {
+		return textField_3;
+	}
+	
+	public JTextField getTextField_4() {
+		return textField_4;
+	}
+	
+	public JTextField getTextField_5() {
+		return textField_5;
+	}
+	
+	public JTextField getTextField_6() {
+		return textField_6;
+	}
+	
+	public JTextField getTextField_7() {
+		return textField_7;
+	}
+	
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
+	
+	public JButton getBtnZaloguj() {
+		return btnZaloguj;
+	}
+	
+	public JButton getBtnZarejestruj() {
+		return btnZarejestruj;
+	}
 }
