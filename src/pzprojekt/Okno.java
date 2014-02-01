@@ -19,6 +19,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
 //import javax.swing.tree.TreePath;
 
 public class Okno {
@@ -69,7 +70,7 @@ public class Okno {
 		
 		frame = new JFrame();
 		frame.setTitle("EPER");
-		frame.setBounds(100, 100, 800, 500);
+		frame.setBounds(100, 200, 800, 500);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        
@@ -83,6 +84,7 @@ public class Okno {
         //------------------------------------Ustawienia splitPane
         
 	    JSplitPane splitpanel = new JSplitPane();
+	    splitpanel.setBackground(new Color(0, 153, 204));
 	    splitpanel.setEnabled(false);
 	
     	eper = new JPanel();

@@ -152,7 +152,7 @@ public static Vector<String> pobierzKategorie(){
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("błąd połączenia z bazą danych.");
 		}
 		return kategorie;	
 	}
@@ -167,7 +167,7 @@ public static Vector<String> pobierzKategorie(){
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("błąd połączenia z bazą danych.");
 		}
 		return rs;	
 	}
