@@ -76,6 +76,7 @@ public class Okno {
        
         tabbedPane = new JTabbedPane();
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPane.setUI(new PlasticTP()); 
         
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
         admin=new AdminPanel();

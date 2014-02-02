@@ -48,7 +48,7 @@ public class EperTree extends JPanel {
 			    				}
 			    				
 			    			} catch (SQLException e) {
-			    				e.printStackTrace();
+			    				System.out.println("Błąd połaczenia z baza danych!");
 			    			}
 			    		}
 			    	}
