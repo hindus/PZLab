@@ -255,6 +255,7 @@ public class UserPanel extends JPanel{
         btnZarejestruj.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		rejestruj();
+        		
         	}
         });
           
@@ -273,20 +274,35 @@ public class UserPanel extends JPanel{
 		String telefon=textField_6.getText();
 		String email=textField_7.getText();
 		
-		textField_1.setText("");
-		textField_2.setText("");
-		textField_3.setText("");
-		textField_4.setText("");
-		textField_5.setText("");
-		textField_6.setText("");
-		textField_7.setText("");
 		
-		Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
-		//cl.show(cards, "KOSZYK");
-		Okno.showLogin("KOSZYK");
-		//label.setText(User.imie+" "+User.nazwisko);
-		Mail.sendRegister(email, username, imie, nazwisko, haslo);
-	
+		if((username.equals("")) || haslo.equals("") || imie.equals("") || nazwisko.equals("") || adres.equals("") || telefon.equals("") || email.equals(""))
+		{
+			JOptionPane.showMessageDialog(Okno.getFrame(), "Wszystkie pola rejestracji muszą być wypełnione.");
+		}
+		else
+		{
+			if(email.contains("@") && email.contains("."))
+			{
+				textField_1.setText("");
+				textField_2.setText("");
+				textField_3.setText("");
+				textField_4.setText("");
+				textField_5.setText("");
+				textField_6.setText("");
+				textField_7.setText("");
+				
+				Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
+				//cl.show(cards, "KOSZYK");
+				//Okno.showLogin("KOSZYK");
+				//label.setText(User.imie+" "+User.nazwisko);
+				JOptionPane.showMessageDialog(Okno.getFrame(), "Rejestracja przebiegła pomyślnie, e-mail potwierdzający rejestrację został wysłany.\nZaloguj sie teraz za pomocą Twojego loginu oraz hasła.");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(Okno.getFrame(), "Wprowadzony adres e-mail jest nieprawidłowy.");
+
+			}
+		}
 	}
 	
 	public static void loguj()
