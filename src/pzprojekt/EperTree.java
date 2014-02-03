@@ -29,34 +29,8 @@ public class EperTree extends JPanel {
     	tree=new JTree();
     	
     	//------------------POBIERANIE SAMOCHODÓW
-
-			tree.setModel(new DefaultTreeModel(
-			    	new DefaultMutableTreeNode("Alfa Romeo") {
-			    		{	    	    					
-			    			DefaultMutableTreeNode node;
-
-			    			try {
-			    				Vector<String> kategorie=Database.pobierzKategorie();
-			    				
-			    				ResultSet rs=Database.pobierzSamochody();
-			    				while(rs.next())
-			    				{
-			    					String nazwa=rs.getString("nazwa");				
-			    					
-			    					node = new DefaultMutableTreeNode(nazwa);
-			    					add(node);
-			    					
-			    					for(int i=0;i<kategorie.size();i++){
-			    						node.add(new DefaultMutableTreeNode(kategorie.get(i)));
-			    					}    	    					
-			    				}
-			    				
-			    			} catch (SQLException e) {
-			    				System.out.println("Błąd połaczenia z baza danych!");
-			    			}
-			    		}
-			    	}
-			    ));
+    	ustawDrzewo();
+			
 
 	    this.setBounds(0, 0, 257, 427);
 	    this.add(tree);
@@ -85,6 +59,37 @@ public class EperTree extends JPanel {
 	    
 	}
 
+	public static void ustawDrzewo()
+	{
+		tree.setModel(new DefaultTreeModel(
+		    	new DefaultMutableTreeNode("Alfa Romeo") {
+		    		{	    	    					
+		    			DefaultMutableTreeNode node;
+
+		    			try {
+		    				Vector<String> kategorie=Database.pobierzKategorie();
+		    				
+		    				ResultSet rs=Database.pobierzSamochody();
+		    				while(rs.next())
+		    				{
+		    					String nazwa=rs.getString("nazwa");				
+		    					
+		    					node = new DefaultMutableTreeNode(nazwa);
+		    					add(node);
+		    					
+		    					for(int i=0;i<kategorie.size();i++){
+		    						node.add(new DefaultMutableTreeNode(kategorie.get(i)));
+		    					}    	    					
+		    				}
+		    				
+		    			} catch (SQLException e) {
+		    				System.out.println("Błąd połaczenia z baza danych!");
+		    			}
+		    		}
+		    	}
+		    ));
+	}
+	
 	public static JTree getTree() {
 		return tree;
 	}

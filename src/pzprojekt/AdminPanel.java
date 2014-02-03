@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import sun.reflect.generics.tree.Tree;
+
 public class AdminPanel extends JPanel implements ActionListener
 {
 	public AdminPanel()
@@ -220,6 +222,7 @@ public class AdminPanel extends JPanel implements ActionListener
 				String nazwaSamochodu = textField.getText();
 				textField.setText("");
 				Database.insert("samochody",nazwaSamochodu);
+				EperTree.ustawDrzewo();
 				
 			}
 		});
