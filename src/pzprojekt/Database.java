@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -65,6 +66,10 @@ public class Database {
 				System.out.println("Błąd połączenia z serwerem mysql!");
 			}
 	}
+	
+
+	
+	
 	
 	public static void insert(String column, String value)
 	{
@@ -194,6 +199,43 @@ public static Vector<String> pobierzKategorie(){
 		}
 		return kategorie;	
 	}
+
+	public static Vector<String> pobierzCzesci(){
+		Vector<String> czesci=new Vector<String>();
+		try {
+			st=con.createStatement();
+			String query = "select * from czesci";
+			rs=st.executeQuery(query);
+			
+			while(rs.next()){
+				czesci.add(rs.getString("id_czesci")+" - "+rs.getString("nazwa")+rs.getString("samochod"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("błąd połączenia z bazą danych.");
+		}
+		return czesci;	
+	}
+	
+	public static Vector<String> pobierzUserow(){
+		Vector<String> users=new Vector<String>();
+		try {
+			st=con.createStatement();
+			String query = "select * from users";
+			rs=st.executeQuery(query);
+			
+			while(rs.next()){
+				users.add(rs.getString("user_id")+" - "+rs.getString("username"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("błąd połączenia z bazą danych.");
+		}
+		return users;	
+	}
+
 	
 	public static ResultSet pobierzDane(String samochod, String kategoria){
 		

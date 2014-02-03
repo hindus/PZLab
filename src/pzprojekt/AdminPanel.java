@@ -5,12 +5,18 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class AdminPanel extends JPanel implements ActionListener
 {
@@ -19,6 +25,23 @@ public class AdminPanel extends JPanel implements ActionListener
 		this.setBounds(0, 12, 697, 487);
 		this.setLayout(null);
 		this.setBounds(0, 0, 441, 456);
+		
+		final DefaultComboBoxModel<String> samochody = new DefaultComboBoxModel<String>();
+		ResultSet rs=Database.pobierzSamochody();
+		try {
+			while(rs.next())
+			{
+				String nazwa=rs.getString("nazwa");
+				samochody.addElement(nazwa);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
@@ -59,7 +82,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblUsuSamochd.gridy = 1;
 		this.add(lblUsuSamochd, gbc_lblUsuSamochd);
 		
-		final JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox(samochody);
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -106,29 +129,13 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_label_3.gridy = 3;
 		this.add(label_3, gbc_label_3);
 		
-		final JComboBox comboBox_1 = new JComboBox();
+		final JComboBox comboBox_1 = new JComboBox(Database.pobierzKategorie());
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_1.gridx = 1;
 		gbc_comboBox_1.gridy = 3;
 		this.add(comboBox_1, gbc_comboBox_1);
-		
-		JLabel label = new JLabel("ID:");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.EAST;
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 2;
-		gbc_label.gridy = 3;
-		this.add(label, gbc_label);
-		
-		JComboBox comboBox_5 = new JComboBox();
-		GridBagConstraints gbc_comboBox_5 = new GridBagConstraints();
-		gbc_comboBox_5.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_5.gridx = 3;
-		gbc_comboBox_5.gridy = 3;
-		this.add(comboBox_5, gbc_comboBox_5);
 		
 		JButton button_2 = new JButton("Usuń");
 		GridBagConstraints gbc_button_2 = new GridBagConstraints();
@@ -169,29 +176,13 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblUsuCz.gridy = 5;
 		this.add(lblUsuCz, gbc_lblUsuCz);
 		
-		final JComboBox comboBox_2 = new JComboBox();
+		final JComboBox comboBox_2 = new JComboBox(Database.pobierzCzesci());
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_2.gridx = 1;
 		gbc_comboBox_2.gridy = 5;
 		this.add(comboBox_2, gbc_comboBox_2);
-		
-		JLabel label_1 = new JLabel("ID:");
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.anchor = GridBagConstraints.EAST;
-		gbc_label_1.insets = new Insets(0, 0, 5, 5);
-		gbc_label_1.gridx = 2;
-		gbc_label_1.gridy = 5;
-		this.add(label_1, gbc_label_1);
-		
-		JComboBox comboBox_6 = new JComboBox();
-		GridBagConstraints gbc_comboBox_6 = new GridBagConstraints();
-		gbc_comboBox_6.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_6.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_6.gridx = 3;
-		gbc_comboBox_6.gridy = 5;
-		this.add(comboBox_6, gbc_comboBox_6);
 		
 		JButton button_3 = new JButton("Usuń");
 		GridBagConstraints gbc_button_3 = new GridBagConstraints();
@@ -208,29 +199,13 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblUsuUytkownika.gridy = 6;
 		this.add(lblUsuUytkownika, gbc_lblUsuUytkownika);
 		
-		final JComboBox comboBox_3 = new JComboBox();
+		final JComboBox comboBox_3 = new JComboBox(Database.pobierzUserow());
 		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
 		gbc_comboBox_3.insets = new Insets(0, 0, 0, 5);
 		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_3.gridx = 1;
 		gbc_comboBox_3.gridy = 6;
 		this.add(comboBox_3, gbc_comboBox_3);
-		
-		JLabel label_2 = new JLabel("ID:");
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		gbc_label_2.anchor = GridBagConstraints.EAST;
-		gbc_label_2.insets = new Insets(0, 0, 0, 5);
-		gbc_label_2.gridx = 2;
-		gbc_label_2.gridy = 6;
-		this.add(label_2, gbc_label_2);
-		
-		JComboBox comboBox_7 = new JComboBox();
-		GridBagConstraints gbc_comboBox_7 = new GridBagConstraints();
-		gbc_comboBox_7.insets = new Insets(0, 0, 0, 5);
-		gbc_comboBox_7.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_7.gridx = 3;
-		gbc_comboBox_7.gridy = 6;
-		this.add(comboBox_7, gbc_comboBox_7);
 		
 		JButton button_4 = new JButton("Usuń");
 		GridBagConstraints gbc_button_4 = new GridBagConstraints();
