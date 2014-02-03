@@ -1,5 +1,7 @@
 package pzprojekt;
 
+import java.awt.BorderLayout;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +9,14 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
 
 
 
@@ -60,7 +70,29 @@ public class Database {
 	{
 		try
 		{
-			String query = "INSERT INTO "+column+" VALUES ('"+value+"')";
+			String query = "INSERT INTO "+column+" (nazwa) VALUES ('"+value+"')";
+			
+			if(column.equals("samochody"))
+			{
+			    JFileChooser chooser = new JFileChooser("./");
+			    chooser.setDialogTitle("Wczytaj plik..."); 
+			    FileNameExtensionFilter filtr = new FileNameExtensionFilter("Pliki graficzne", ".jpg", ".gif", "jpeg", ".png");
+			    chooser.addChoosableFileFilter(filtr);
+
+			    if(chooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION)
+			      {
+			    	String sciezka = chooser.getSelectedFile().getPath();
+			    	System.out.println(sciezka);
+					query = "INSERT INTO "+column+" (nazwa, obrazek) VALUES ('"+value+"','"+sciezka+"')";
+
+			      }
+			}	
+			else
+				if(column.equals("kategorie"))
+					query = "INSERT INTO "+column+" (nazwa) VALUES ('"+value+"')";	
+
+			//
+			System.out.println(query);
 			st=con.createStatement();
 			st.executeUpdate(query);		
 			st.close();

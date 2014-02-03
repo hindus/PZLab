@@ -12,10 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- * Klasa AdminPanel odpowiedzialna jest za wyświetlanie panelu administratora.
- *
- */
 public class AdminPanel extends JPanel implements ActionListener
 {
 	public AdminPanel()
@@ -39,7 +35,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblDodajSamochd.gridy = 0;
 		this.add(lblDodajSamochd, gbc_lblDodajSamochd);
 		
-		JTextField textField = new JTextField();
+		final JTextField textField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -63,7 +59,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblUsuSamochd.gridy = 1;
 		this.add(lblUsuSamochd, gbc_lblUsuSamochd);
 		
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -86,7 +82,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblDodajKategori.gridy = 2;
 		this.add(lblDodajKategori, gbc_lblDodajKategori);
 		
-		JTextField textField_1 = new JTextField();
+		final JTextField textField_1 = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
@@ -110,7 +106,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_label_3.gridy = 3;
 		this.add(label_3, gbc_label_3);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		final JComboBox comboBox_1 = new JComboBox();
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
@@ -149,7 +145,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblDodajCz.gridy = 4;
 		this.add(lblDodajCz, gbc_lblDodajCz);
 		
-		JTextField textField_2 = new JTextField();
+		final JTextField textField_2 = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
@@ -173,7 +169,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblUsuCz.gridy = 5;
 		this.add(lblUsuCz, gbc_lblUsuCz);
 		
-		JComboBox comboBox_2 = new JComboBox();
+		final JComboBox comboBox_2 = new JComboBox();
 		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
 		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
@@ -212,7 +208,7 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_lblUsuUytkownika.gridy = 6;
 		this.add(lblUsuUytkownika, gbc_lblUsuUytkownika);
 		
-		JComboBox comboBox_3 = new JComboBox();
+		final JComboBox comboBox_3 = new JComboBox();
 		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
 		gbc_comboBox_3.insets = new Insets(0, 0, 0, 5);
 		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
@@ -241,9 +237,86 @@ public class AdminPanel extends JPanel implements ActionListener
 		gbc_button_4.gridx = 4;
 		gbc_button_4.gridy = 6;
 		this.add(button_4, gbc_button_4);
-		
-	}
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("dodaj samochod");
+				String nazwaSamochodu = textField.getText();
+				textField.setText("");
+				Database.insert("samochody",nazwaSamochodu);
+				
+			}
+		});
 
+
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+				
+				public void actionPerformed(ActionEvent arg0) {
+					System.out.println("usun samochod");
+					String nazwaSamochodu = comboBox.getSelectedItem().toString();
+					Database.delete("samochody","nazwaS",nazwaSamochodu);
+			}
+		});
+
+
+
+		button.addActionListener(new ActionListener() {			
+			
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Dodaj kategorie");
+				String nazwaKategorii = textField_1.getText();
+				Database.insert("kategorie",nazwaKategorii);
+				textField_1.setText("");
+
+			}
+		});
+
+		button_2.addActionListener(new ActionListener() {
+
+			
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("usun kategorie");
+				String nazwaKategorii = comboBox_1.getSelectedItem().toString();
+				Database.delete("kategorie","nazwaK",nazwaKategorii);
+		}
+	});
+
+
+		button_1.addActionListener(new ActionListener() {			
+			
+			public void actionPerformed(ActionEvent arg0) {
+				String nazwaCzesci = textField_2.getText();
+				Database.insert("czesci",nazwaCzesci);
+				textField_2.setText("");
+				System.out.println("Dodaj czesc");
+
+			}
+		});
+
+
+		button_3.addActionListener(new ActionListener() {
+
+			
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("usun czesc");
+				String nazwaCzesci = comboBox_2.getSelectedItem().toString();
+				Database.delete("czesci","nazwaC",nazwaCzesci);
+		}
+	});
+
+		button_4.addActionListener(new ActionListener() {
+
+			
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("usun uzytkownika");
+				String nazwaUzytkownika = comboBox_3.getSelectedItem().toString();
+				Database.delete("kategorie","nazwaK",nazwaUzytkownika);
+		}
+	});
+	}	
+		
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.toString());
 		
