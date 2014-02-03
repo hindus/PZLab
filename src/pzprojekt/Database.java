@@ -254,15 +254,40 @@ public static Vector<String> pobierzKategorie(){
 	
 	public static boolean isAdmin(String username)
 	{
-		String admin1 = "krzychu";
-		String admin2 = "mateusz";
-		String admin3 = "roszk";
+		try
+		{
+			String query = "select * from admins where login='"+username+"'";
+			st=con.createStatement();
+			rs=st.executeQuery(query);
 
-		if(username.equals(admin1) || username.equals(admin2) || username.equals(admin3))
-		{				
-			return true;
+			while(rs.next())
+			{
+				try
+				{
+					String loginwBazie = rs.getString("login");
+
+					if(username.compareTo(loginwBazie)==0 && !username.isEmpty()) 
+						{
+							return true;
+						}
+					else 
+						return false;
+				}
+				
+				catch(SQLException ex)
+				{
+				}
+			}
+			st.close();
+		} 
+
+	catch (Exception ex)
+		{
+			System.out.println("Błąd połaczenia z baza danych" + ex);
 		}
-		else
+		
+		
+
 			return false;
 
 		
