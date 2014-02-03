@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Klasa UserBasker przechowuje dane o stanie koszyka uzytkownika.
+ * Klasa UserBasket przechowuje dane o stanie koszyka uzytkownika.
  *
  */
 public class UserBasket extends JPanel {
