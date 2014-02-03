@@ -205,6 +205,45 @@ public static Vector<String> pobierzKategorie(){
 		return id;	
 	}
 	
+	public static boolean checkAvailability(String username)
+	{
+		try
+			{
+				String query = "select * from users where username='"+username+"'";
+				st=con.createStatement();
+				rs=st.executeQuery(query);
+
+				while(rs.next())
+				{
+					try
+					{
+						String loginwBazie = rs.getString("USERNAME");
+
+						if(username.compareTo(loginwBazie)==0 && !username.isEmpty()) 
+							{
+								return false;
+							}
+						else 
+							return true;
+						//Sprawdza, czy dany login jest dostępny
+					}
+					
+					catch(SQLException ex)
+					{
+					}
+				}
+				st.close();
+			} 
+	
+		catch (Exception ex)
+			{
+				System.out.println("Błąd połaczenia z baza danych" + ex);
+			}
+		return false;
+	}
+	
+	
+	
 	public static boolean userlogin(String username, String password)
 	{
 		try

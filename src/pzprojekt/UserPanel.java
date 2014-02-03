@@ -283,19 +283,28 @@ public class UserPanel extends JPanel{
 		{
 			if(email.contains("@") && email.contains("."))
 			{
-				textField_1.setText("");
-				textField_2.setText("");
-				textField_3.setText("");
-				textField_4.setText("");
-				textField_5.setText("");
-				textField_6.setText("");
-				textField_7.setText("");
-				
-				Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
-				//cl.show(cards, "KOSZYK");
-				//Okno.showLogin("KOSZYK");
-				//label.setText(User.imie+" "+User.nazwisko);
-				JOptionPane.showMessageDialog(Okno.getFrame(), "Rejestracja przebiegła pomyślnie, e-mail potwierdzający rejestrację został wysłany.\nZaloguj sie teraz za pomocą Twojego loginu oraz hasła.");
+				if(Database.checkAvailability(username))
+				{
+					textField_1.setText("");
+					textField_2.setText("");
+					textField_3.setText("");
+					textField_4.setText("");
+					textField_5.setText("");
+					textField_6.setText("");
+					textField_7.setText("");
+					
+					Database.register(username,haslo,imie,nazwisko,adres,telefon, email);
+					//cl.show(cards, "KOSZYK");
+					//Okno.showLogin("KOSZYK");
+					//label.setText(User.imie+" "+User.nazwisko);
+					JOptionPane.showMessageDialog(Okno.getFrame(), "Rejestracja przebiegła pomyślnie, e-mail potwierdzający rejestrację został wysłany.\nZaloguj sie teraz za pomocą Twojego loginu oraz hasła.");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(Okno.getFrame(), "Podany login jest już zajęty.");
+
+				}
+			
 			}
 			else
 			{
