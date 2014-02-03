@@ -1,5 +1,11 @@
 package pzprojekt;
 
+
+
+/**
+ * Klasa User przechowuje dane dotyczace uzytkownika.
+ *
+ */
 public class User {
 	public static String username, imie, nazwisko, adres, telefon, email;
 	public static int userId;

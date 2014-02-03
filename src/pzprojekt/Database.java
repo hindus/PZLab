@@ -8,6 +8,12 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
 
+
+
+/**
+ * Klasa Database odpowiedzialna jest za obsługę połączeń z bazą danych SQL oraz operacje na niej wykonywane. 
+ *
+ */
 public class Database {
 
 	static Connection con;

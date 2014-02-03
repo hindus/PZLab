@@ -22,6 +22,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 //import javax.swing.tree.TreePath;
 
+/**
+ * Klasa Okno odpowiedzialna jest za generowanie glownego okna aplikacji.
+ *
+ */
 public class Okno {
 	
 	private static JFrame frame;
@@ -76,7 +80,7 @@ public class Okno {
        
         tabbedPane = new JTabbedPane();
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPane.setUI(new PlasticTP()); 
+		tabbedPane.setUI(new Tab()); 
         
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
         admin=new AdminPanel();

@@ -11,10 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+
+
+/**
+ * Klasa EperDetails odpowiedzialna jest za wyswietlanie szczegolow dotyczacych danej kategorii czesci.
+ *
+ */
 public class EperDetails extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 4009610015728591272L;
 	private JTextField textField_8;
     private JTextField textField_9;

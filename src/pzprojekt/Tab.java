@@ -6,21 +6,23 @@ import javax.swing.*;
 import javax.swing.plaf.*;
 import javax.swing.plaf.basic.*;
 
-public class PlasticTP extends BasicTabbedPaneUI {
+/**
+ * Klasa Tab odpowiedzialna jest za zmieniony wygląd zakładek w głównym oknie aplikacji.
+ *
+ */
+public class Tab extends BasicTabbedPaneUI {
   private Color selectColor;
   private int inclTab = 12;
   private int anchoFocoV = inclTab;
   private int anchoFocoH = 4;
   private int anchoCarpetas = 18;
   
-  /**
-   * En este poligono se guarda la forma de la pestaña. Es muy importante. 
-   */
+
   private Polygon shape;
 
   
   public static ComponentUI createUI( JComponent c) {
-    return new PlasticTP();
+    return new Tab();
   }
 
   protected void installDefaults() {
@@ -104,11 +106,10 @@ public class PlasticTP extends BasicTabbedPaneUI {
                                      int tabIndex,
                                      int x, int y, int w, int h,
                                      boolean isSelected ) {
-    // Este es el primer metodo al que se llama, asi que aqui preparamos el shape que dibujara despues todo...
     Graphics2D g2D = (Graphics2D)g;
     GradientPaint gradientShadow;
 
-    int xp[] = null;  // Para la forma
+    int xp[] = null;  
     int yp[] = null;
     switch( tabPlacement ) {
       case LEFT:
@@ -135,51 +136,38 @@ public class PlasticTP extends BasicTabbedPaneUI {
         yp = new int[]{ y+h, y+3, y,   y,             y+1,           y+3,         y+h, y+h};
        gradientShadow = new GradientPaint( 0, 0,  new Color(255,255,255),
                                            0, y+h/4, new Color(153,186,243));
-        //gradientShadow = new GradientPaint( x, y,Color.WHITE,
-           //     x, y+h,new Color(0,128,255));
+
         break;
     };
 
     shape = new Polygon( xp, yp, xp.length);
 
-    // Despues ponemos el color que toque    
     if ( isSelected ) {
-    //	System.out.println("Tab is Selected");
       g2D.setColor( selectColor );
       g2D.setPaint( gradientShadow);
     }
     else {
-    	// g2D.setPaint( gradientShadow);
       g2D.setColor( tabPane.getBackgroundAt( tabIndex));
      g2D.setColor( selectColor );
     }
 
-    // Encima, pintamos la pestaña con el color que sea
     g2D.fill( shape);
     
-    // Encima, pintamos la pestaña con el color que le corresponde por profundidad
     if ( runCount > 1 ) {
       g2D.setColor( hazAlfa( getRunForTab( tabPane.getTabCount(), tabIndex)-1));
       g2D.fill( shape);
     }
     
-    // Y despues, le damos un sombreado que hace que parezca curbada (¿A que duele ver algunas faltas de ortografia?)
    
     g2D.fill( shape);
   }
 
-   /**
-    * Este metodo devuelve un tamaño mas grande de lo necesario, haciendoer hueco para
-    * la decoracion.
-    */
+
   protected int calculateTabWidth( int tabPlacement, int tabIndex, FontMetrics metrics) {
     return 8 + inclTab + super.calculateTabWidth( tabPlacement, tabIndex, metrics);
   }
 
-   /**
-    * Este metodo devuelve un tamaño mas grande de lo necesario, haciendo el hueco para
-    * la decoracion.
-    */
+
   protected int calculateTabHeight( int tabPlacement, int tabIndex, int fontHeight) {
     if ( tabPlacement == LEFT || tabPlacement == RIGHT ) {
       return super.calculateTabHeight( tabPlacement, tabIndex, fontHeight);
@@ -189,16 +177,12 @@ public class PlasticTP extends BasicTabbedPaneUI {
     }
   }
 
-   /**
-    * Este metodo dibuja el borde.
-    */
+
   protected void paintTabBorder( Graphics g, int tabPlacement, int tabIndex,
                                  int x, int y, int w, int h, boolean isSelected) {
   }
 
-   /**
-    * Este metodo dibuja una señal amarilla en la solapa que tiene el foco
-    */
+
   protected void paintFocusIndicator( Graphics g, int tabPlacement,
                                       Rectangle[] rects, int tabIndex,
                                       Rectangle iconRect, Rectangle textRect,
@@ -209,11 +193,7 @@ public class PlasticTP extends BasicTabbedPaneUI {
     }
   }
 
-  /**
-   * Esta funcion devuelve una sombra mas opaca cuanto mas arriba este la fila. 
-   * A partir de valores de fila superiores a 7 siempre devuelve el mismo color 
-   * @param fila int la fila a pintar
-   */
+
   protected Color hazAlfa( int fila) {
     int alfa = 0;
     if ( fila >= 0 ) {

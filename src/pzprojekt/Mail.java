@@ -12,6 +12,10 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.SwingWorker;
 
 
+/**
+ * Klasa mail odpowiedzialna jest za obsluge wysylania e-maili do uzytkownika.
+ *
+ */
 public class Mail {
 
     public static void sendRegister(String mail, String username, String name, String surname, String password) {

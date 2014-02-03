@@ -12,6 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Klasa AdminPanel odpowiedzialna jest za wyświetlanie panelu administratora.
+ *
+ */
 public class AdminPanel extends JPanel implements ActionListener
 {
 	public AdminPanel()

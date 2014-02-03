@@ -12,10 +12,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Klasa UserBasker przechowuje dane o stanie koszyka uzytkownika.
+ *
+ */
 public class UserBasket extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2324737019103682442L;
 	private JTable table;
 	private static JLabel label;

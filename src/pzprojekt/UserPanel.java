@@ -19,10 +19,12 @@ import javax.swing.JPasswordField;
 import java.awt.Insets;
 
 
+/**
+ * Klasa UserPanel odpowiedzialna jest za komponenty wywwietlane w zakladce sklep oraz obsluge przyciskow zaloguj i zarejestruj.
+ *
+ */
 public class UserPanel extends JPanel{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8561051996348262316L;
 	private static JTextField textField;
 	private static JTextField textField_1;

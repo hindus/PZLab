@@ -16,6 +16,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+/**
+ * Klasa EperTree odpowiedzialna jest za wyświetlanie drzewa samochodów i ich części.
+ *
+ */
 public class EperTree extends JPanel {
 	private static JTree tree;
 	

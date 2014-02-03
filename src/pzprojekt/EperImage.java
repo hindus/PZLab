@@ -14,6 +14,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+
+
+/**
+ * Klasa EperImage odpowiedzialna jest za wyświetlanie obrazka tła.
+ *
+ */
 public class EperImage extends JPanel{
 	private static HashMap<String, BufferedImage> bufor;
     private BufferedImage image;
